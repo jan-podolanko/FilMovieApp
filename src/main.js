@@ -7,4 +7,10 @@ const app = new App({
 	}
 });
 
+/* new Login({
+	target: document.body,
+	props: {
+	}
+}); */
+
 export default app;

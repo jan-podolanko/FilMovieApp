@@ -1,10 +1,34 @@
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
 <script>
-	export let name;
+ 	import { collection,getDocs } from "firebase/firestore";
+ 	import { db } from './firebase.js';
+
+	async function showStuff(){
+		const docRef = collection(db, "films");
+		const docSnap = await getDocs(docRef)
+		const docList = docSnap.docs.map(doc => doc.data());
+		return docList
+	}
+
+	let stuff = showStuff();
+
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	{#await stuff}
+	<p>...waiting</p>
+	{:then stuff}
+	<ul class="list-group">
+		{#each stuff as city}
+				<li class="list-group-item">{city.title}</li>
+		{/each}
+	</ul>
+	{:catch error}
+		{error}
+	{/await}
 </main>
 
 <style>
@@ -28,3 +52,4 @@
 		}
 	}
 </style>
+

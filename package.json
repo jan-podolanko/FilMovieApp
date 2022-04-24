@@ -1,6 +1,7 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "rollup -c",
@@ -18,6 +19,11 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "firebase": "^9.6.11",
+    "firebase-admin": "^10.1.0",
+    "firebaseui": "^6.0.1",
+    "rxfire": "^6.0.3",
+    "rxjs": "^7.5.5",
     "sirv-cli": "^2.0.0"
   }
 }
