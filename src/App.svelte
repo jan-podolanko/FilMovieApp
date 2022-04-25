@@ -3,35 +3,39 @@
 </head>
 
 <script>
- 	import { collection,getDocs } from "firebase/firestore";
- 	import { addFilm,db } from './firebase.js';
+ 	import { Timestamp } from 'firebase/firestore';
+ 	import { addFilm,showStuff } from './firebase.js';
 
-	async function showStuff(){
-		const docRef = collection(db, "films");
-		const docSnap = await getDocs(docRef)
-		const docList = docSnap.docs.map(doc => doc.data());
-		return docList
-	}
-
-/* 	async function addFilm(){
-		addDoc(collection(db, "films"), {
-			name: "Tokyo",
-			country: "Japan"
-		});
-	} */
-/* 	function showFilm(film){
-		const film_div = document.getElementById("film-container");
-		let title = document.createElement("p");
-		let string = `Title: {film.title}`;
-		title.innerText = {@html string};
-
-	} */
 	let title, synopsis, release, cast, directors;
 	let stuff = showStuff();
 	let shown = false;
 	let selected;
+	
 	function show(){
 		shown = !shown
+		let container = document.getElementById('film');
+		container.innerHTML = ''
+	}
+
+	function createDiv(variable){
+		let container = document.getElementById('film');
+		container.innerHTML = ''
+		let title = document.createElement('p');
+		title.innerHTML = 'Title: ' + variable.title;
+
+		let release = document.createElement('p');
+		release.innerHTML = 'Release date: ' + variable.release.toDate().getDate() + '.' + variable.release.toDate().getMonth() + '.' + variable.release.toDate().getFullYear();
+
+		let directors = document.createElement('p');
+		directors.innerHTML = 'Directors: ' + variable.directors;
+
+		let cast = document.createElement('p');
+		cast.innerHTML = 'Cast: ' + variable.cast;
+
+		let synopsis = document.createElement('p');
+		synopsis.innerHTML = 'Synopsis: ' + variable.synopsis;
+
+		container.append(title,release,directors,cast,synopsis);
 	}
 </script>
 
@@ -42,30 +46,22 @@
 	{:then stuff}
 	<ul class="list-group">
 		{#each stuff as film}
-			<div on:click={show} class="list-group-item list-group-item-action">{film.title}</div>
-			{#if shown}
-				<div>
-					<p>Title: {film.title}</p>
-					<p>Release date: {film.release.toDate().getDate()}.{film.release.toDate().getMonth()}.{film.release.toDate().getFullYear()}</p>
-					{#if film.directors.length == 1}
-						<p>Director: {film.directors}</p>
-					{:else}
-						<p>Directors: {film.directors.join(', ')}</p>
-					{/if}
-					<p>Cast: {film.cast.join(', ')}</p>
-					<p>Synopsis: {film.synopsis}</p>
-				</div>
-			{/if}
+			<div on:click={()=>createDiv(film)} class="list-group-item list-group-item-action">{film.title}</div>
 		{/each}
 	</ul>
 	{:catch error}
 		{error}
 	{/await}
 	</div>
+	
+	<div id="film"></div>
 
-	<button > ayyyy </button>
+	{#if !shown}
+	<button class="btn btn-primary" on:click={show}>Add movie</button>
+	{/if}
 
-
+	{#if shown}
+	<button class="btn btn-primary" on:click={show}>Close</button>
 	<div>
 		<form>
 			<div class="form-group">
@@ -78,20 +74,22 @@
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Cast</label>
-				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={cast}>
+				<input type="synopsis" class="form-control" id="cast-input" bind:value={cast}>
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Directors</label>
-				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={directors}>
+				<input type="synopsis" class="form-control" id="directors-input" bind:value={directors}>
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Release</label>
-				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={release}>
+				<input type="date" class="form-control" id="release-input" bind:value={release}>
 			</div>
+		
 
-			<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,release,cast,directors,synopsis)}>Submit</button>
+			<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)}>Submit</button>
 		</form>
 	</div>
+	{/if}
 </main>
 
 
@@ -103,12 +101,12 @@
 		margin: 0 auto;
 	}
 
-	h1 {
+/* 	h1 {
 		color: #ff3e00;
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
-	}
+	} */
 
 	@media (min-width: 640px) {
 		main {

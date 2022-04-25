@@ -1,7 +1,7 @@
 	// Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -31,4 +31,13 @@ export async function addFilm(title, release, cast, directors, synopsis){
     synopsis: synopsis
   });
 }
+
+export async function showStuff(){
+  const docRef = collection(db, "films");
+  const docSnap = await getDocs(docRef)
+  const docList = docSnap.docs.map(doc => doc.data());
+  console.log(docList)
+  return docList
+}
+
 export const db = getFirestore(app); 
