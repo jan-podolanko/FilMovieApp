@@ -1,8 +1,8 @@
 	// Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
-
+import { addDoc, collection, getDocs, getFirestore, query, setLogLevel as firestoreLogLevel } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,23 +21,42 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-export async function addFilm(title, release, cast, directors, synopsis){
+export const storage = getStorage(app);
+/* firestore().settings({ experimentalForceLongPolling: true });
+ */
+export async function addFilm(title, release, cast, directors, synopsis, picture_url){
   addDoc(collection(db, "films"), {
     title: title,
     release: release,
     cast: cast,
     directors: directors,
-    synopsis: synopsis
+    synopsis: synopsis,
+    picture: picture_url
   });
+  
 }
 
 export async function showStuff(){
   const docRef = collection(db, "films");
-  const docSnap = await getDocs(docRef)
+  const q = query(collection(db, "films"));
+  const docSnap = await getDocs(q) //wczesniej bylo docRef zamaist q
   const docList = docSnap.docs.map(doc => doc.data());
   console.log(docList)
   return docList
+
+/*   const cities = [];
+  const q = query(collection(db, "films"));
+  onSnapshot(q, (querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+      cities.push(doc.data().name);
+  });
+  });
+  console.log(cities)
+  return cities */
 }
 
-export const db = getFirestore(app); 
+
+//uploadBytes(ref(storage, `images/${files[0].name}`), files[0])
+//firestoreLogLevel("debug");
+
+export const db = getFirestore(app, { useFetchStreams: false, experimentalAutoDetectLongPolling: true }); 

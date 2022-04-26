@@ -1,11 +1,18 @@
 <script>
  	import { Timestamp } from 'firebase/firestore';
+ 	import { ref,uploadBytes } from 'firebase/storage';
  	import { fade } from 'svelte/transition';
- 	import { addFilm,showStuff } from './firebase.js';
+ 	import { addFilm,showStuff,storage } from './firebase.js';
 
-	let title, synopsis, release, cast, directors;
+
+	let title, synopsis, release, cast, directors, files, url;
 	let stuff = showStuff();
 	let shown = false;
+
+	function uploadPic(files){
+		const imgRef = ref(storage, `images/${files[0].name}`);
+  	uploadBytes(imgRef, files[0])
+	}
 	
 	function show(){
 		shown = !shown
@@ -41,6 +48,8 @@
 		let film_container = document.getElementById('film-container')
 		film_container.style.visibility = 'hidden';
 	}
+
+	//getDownloadURL(ref(storage,`images/${files[0]}`))
 </script>
 
 <main>
@@ -73,7 +82,14 @@
 	{#if shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>close</button>
 	<div transition:fade>
+		{#if files}
+		<button on:click={uploadPic(files)}>Upload image</button>
+		{/if}
 		<form>
+			<div class="form-group">
+				<label for="inputTitle">Image</label>
+				<input type="file" class="form-control" id="file-input" bind:files>
+			</div>
 			<div class="form-group">
 				<label for="inputTitle">Title</label>
 				<input type="title" class="form-control" id="title-input" bind:value={title}>
@@ -94,11 +110,11 @@
 				<label for="inputSynopsis">Synopsis</label>
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
 			</div>
-
-			<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)}>Submit</button>
 		</form>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)} action="#">Submit</button>
 	</div>
 	{/if}
+
 </main>
 
 
