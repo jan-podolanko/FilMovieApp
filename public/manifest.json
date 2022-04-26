@@ -2,7 +2,7 @@
   "name": "FilMovieApp",
   "short_name": "FMA",
   "icons": [{
-    "src":"filmstrip.png",
+    "src":"icon.png",
     "sizes": "144x144",
     "type": "image/png"
   }],
