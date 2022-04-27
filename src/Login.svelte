@@ -38,7 +38,7 @@
                 bind:value={email}
                 id="email"
                 type="email"
-                placeholder="name@acme.com"
+                placeholder="name@gmail.com"
                 />
             </div>
             <div class="mb-4">
@@ -54,19 +54,17 @@
             {#if error}
                 <div transition:fade class="p-2 mb-6 bg-red-300">Wrong email or password</div>
             {/if}
-			<div class="btn-group">
-				<div class="mt-3">
-          <button type="button" class="btn btn-primary" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+          <div class="btn-group">
+				    <div class="mt-3">
+                <button type="button" class="btn btn-primary" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+            </div>
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary" on:click|preventDefault={loginWithGoogle}>
+                Sign In with Google
+                </button>
+            </div>
+            </form>
         </div>
-        
-        <div class="mt-3">
-            <button type="button" class="btn btn-primary" on:click|preventDefault={loginWithGoogle}>
-            Sign In with Google
-            </button>
-        </div>
-			</div>
-    </form>
-  </div>
   {/if}
 </div>
 {#if $user}
