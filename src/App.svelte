@@ -146,6 +146,8 @@
 		border-radius: 5px;
 		visibility: visible;
 		padding: 8px 13px;
+		max-width: 600px;
+		margin: auto;
 		/* transition:visibility 1s linear; */
 	}
 	#film-list-item{
@@ -167,9 +169,10 @@
 	#close-info{
 		width: 100%;
 	}
+
 	@media (min-width: 640px) {
 		main {
-			max-width: none;
+			max-width: 600px;
 		}
 	}
 </style>

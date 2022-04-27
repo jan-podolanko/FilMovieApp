@@ -39,10 +39,10 @@
 <p>Directors: {directors}</p>
 <p>Cast: {cast}</p>
 <div class="row">
-<button class="col-4 btn btn-primary material-icons" on:click|once={()=>updateLikes(id,1)}>thumb_up</button>
-<div class="col-2">Likes: {likes}</div>
-<div class="col-2">Dislikes: {dislikes}</div>
-<button class="col-4 btn btn-primary material-icons" on:click|once={()=>updateLikes(id,-1)}>thumb_down_alt</button>
+<button class="col-3 btn btn-primary material-icons" on:click|once={()=>updateLikes(id,1)}>thumb_up</button>
+<div id="counter" class="col-3">{likes}</div>
+<div id="counter" class="col-3">{dislikes}</div>
+<button class="col-3 btn btn-primary material-icons" on:click|once={()=>updateLikes(id,-1)}>thumb_down_alt</button>
 </div>
 <p>Synopsis: {synopsis}</p>
 </div>
@@ -52,7 +52,9 @@
 		width: 100%;
 	}
 
-	#deleteButton{
-		right: 10;
+	#counter{
+		display: inline-block;
+		vertical-align: middle;
+		line-height: normal;
 	}
 </style>

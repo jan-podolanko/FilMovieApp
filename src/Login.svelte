@@ -23,7 +23,7 @@
         <div class="w-full max-w-xs">
             <div class="text-center">
             <h2>{$user.email}</h2>
-            <button type="button" class="mt-3" on:click={logout}>Logout</button>
+            <button type="button" class="mt-3 btn btn-primary" on:click={logout}>Logout</button>
             </div>
         </div>
         {:else}
@@ -41,7 +41,7 @@
                 placeholder="name@acme.com"
                 />
             </div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <label for="password">Password</label>
                 <input
                 class="input-field"
@@ -56,19 +56,26 @@
             {/if}
 			<div class="btn-group">
 				<div class="mt-3">
-                    <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
-                </div>
-                <div class="mt-3">
-                    <button type="button" on:click|preventDefault={loginWithGoogle}>
-                    Sign In with Google
-                    </button>
-                </div>
-			</div>
-            </form>
+          <button type="button" class="btn btn-primary" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
         </div>
-        {/if}
-    </div>
+        
+        <div class="mt-3">
+            <button type="button" class="btn btn-primary" on:click|preventDefault={loginWithGoogle}>
+            Sign In with Google
+            </button>
+        </div>
+			</div>
+    </form>
+  </div>
+  {/if}
+</div>
 {#if $user}
-    <App user_id={$user.id}/>
+  <App user_id={$user.id}/>
 {/if}
 </main>
+
+<style>
+button{
+  margin: 2px;
+}  
+</style>
