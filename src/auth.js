@@ -1,6 +1,6 @@
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth';
 import { readable } from 'svelte/store';
-import {auth} from './firebase.js';
+import { auth } from './firebase.js';
 
 const userMapper = claims => ({
   id: claims.user_id,

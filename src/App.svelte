@@ -1,21 +1,15 @@
 <script>
 	import { Timestamp } from 'firebase/firestore';
-	import { ref,uploadBytes } from 'firebase/storage';
 	import { fade } from 'svelte/transition';
 	import Film from './Film.svelte';
-	import { addFilm,showStuff,storage } from './firebase.js';
-
-
+	import { addFilm,showStuff } from './firebase.js';
+	
+	export let user_id;
 	let title, synopsis, release, cast, directors, files;
 	let stuff = showStuff();
 	let shown = false;
 	let film;
 	let close = false;
-
-	function uploadPic(files){
-		const imgRef = ref(storage, `images/${files[0].name}`);
-  	uploadBytes(imgRef, files[0])
-	}
 	
 	function show(){
 		shown = !shown
@@ -29,7 +23,11 @@
 			release: variable.release,
 			directors: variable.directors,
 			cast: variable.cast,
-			synopsis: variable.synopsis
+			synopsis: variable.synopsis,
+			currentUser: user_id,
+			uploadId: variable.user_id,
+			likes: variable.likes,
+			dislikes: variable.dislikes
 		}
 	}
 
@@ -84,9 +82,6 @@
 	{#if shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>close</button>
 	<div transition:fade>
-		{#if files}
-		<button on:click={uploadPic(files)}>Upload image</button>
-		{/if}
 		<form>
 			<div class="form-group row">
 				<div class="col-md">
@@ -119,10 +114,10 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
 			</div>
 		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis, files)} on:click={()=>vibrate()} action="#">Submit</button>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
-
+	
 	<audio id="audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 </main>
 
