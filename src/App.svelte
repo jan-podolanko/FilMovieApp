@@ -1,10 +1,10 @@
 <script>
 	import { Timestamp } from 'firebase/firestore';
- 	import { ref,uploadBytes } from 'firebase/storage';
- 	import { fade } from 'svelte/transition';
- 	import { addFilm,showStuff,storage,auth } from './firebase.js';
-  	import { initAuth } from './auth';
+	import { ref,uploadBytes } from 'firebase/storage';
+	import { fade } from 'svelte/transition';
+	import { initAuth } from './auth';
 	import Film from './Film.svelte';
+	import { addFilm,auth,showStuff,storage } from './firebase.js';
 
 	const { loginWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
 
