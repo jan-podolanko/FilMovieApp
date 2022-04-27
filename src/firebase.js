@@ -34,6 +34,9 @@ export async function addFilm(title, release, cast, directors, synopsis){
 /*     likes: 0,
     dislikes: 0 */
   });
+  setTimeout(function () {
+        window.location.reload();
+    }, 500);
 }
 
 /* export async function updateLikes(film, like){
