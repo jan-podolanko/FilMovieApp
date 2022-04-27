@@ -28,7 +28,7 @@
             </div>
         </div>
         {:else}
-        <div class="w-full max-w-xs">
+        <div class="row align-items-center justify-content-center">
             <form
             class="px-8 pt-6 pb-8 bg-white shadow-md"
             >
@@ -55,14 +55,16 @@
             {#if error}
                 <div transition:fade class="p-2 mb-6 bg-red-300">Wrong email or password</div>
             {/if}
-            <div>
-                <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
-            </div>
-            <div class="mt-3">
-                <button type="button" on:click|preventDefault={loginWithGoogle}>
-                Sign In with Google
-                </button>
-            </div>
+			<div class="btn-group">
+				<div class="mt-3">
+                    <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+                </div>
+                <div class="mt-3">
+                    <button type="button" on:click|preventDefault={loginWithGoogle}>
+                    Sign In with Google
+                    </button>
+                </div>
+			</div>
             </form>
         </div>
         {/if}

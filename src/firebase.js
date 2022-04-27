@@ -1,8 +1,8 @@
 	// Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, query, setLogLevel as firestoreLogLevel } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,22 +35,16 @@ export async function addFilm(title, release, cast, directors, synopsis, files){
     release: release,
     cast: cast,
     directors: directors,
-    synopsis: synopsis
-/*     likes: 0,
-    dislikes: 0 */
+    synopsis: synopsis,
+    likes: 0,
+    dislikes: 0 
   });
   console.log(doc.id)
   const imgRef = ref(storage, `images/${doc.id}.jpeg`);
   await uploadBytes(imgRef, files[0])
 }
 
-/* export async function updateLikes(film, like){
-  if(like > 0){
-    await updateDoc(film,{likes: increment(like)})
-  } else {
-    await updateDoc(film,{dislikes: increment(like)})
-  }
-} */
+/*  */
 
 export async function showStuff(){
   const docRef = collection(db, "films");
