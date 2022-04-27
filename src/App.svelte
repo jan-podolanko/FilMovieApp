@@ -23,6 +23,7 @@
 
 	function createFilmData(variable){
 		film = {
+			id: variable.id,
 			title: variable.title,
 			release: variable.release,
 			directors: variable.directors,
@@ -48,7 +49,7 @@
 	<p>...waiting</p>
 	{:then stuff}
 	<ul class="list-group">
-		{#each Array.from(stuff.values()) as film}
+		{#each stuff as film}
 			<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
 		{/each}
 	</ul>

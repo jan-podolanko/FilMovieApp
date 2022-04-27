@@ -49,26 +49,13 @@ export async function addFilm(title, release, cast, directors, synopsis, files){
 
 export async function showStuff(){
   const docRef = collection(db, "films");
-  const docSnap = await getDocs(docRef);
-  const map = new Map()
-
-  const docList = docSnap.docs.map(doc => [doc.id, doc.data()]);
-
-  docSnap.docs.forEach(element => {
-    map.set(element.id, element.data())
+  const docSnap = await getDocs(docRef)
+  const docList = docSnap.docs.map(doc => {
+    return {id:doc.id, ...doc.data()}
   });
+
   console.log(docList)
-  return map
-
-/*   const cities = [];
-  const q = query(collection(db, "films"));
-  onSnapshot(q, (querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-      cities.push(doc.data().name);
-  });
-  });
-  console.log(cities)
-  return cities */
+  return docList
 }
 
 
