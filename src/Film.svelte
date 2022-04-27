@@ -1,7 +1,16 @@
 <script>
-/* <p>Title: {film.title}</p>
-					<p>Release date: {film.release.toDate().getDate()}.{film.release.toDate().getMonth()}.{film.release.toDate().getFullYear()}</p>
-					<p>Directors: {film.directors}</p>
-					<p>Cast: {film.cast}</p>
-					<p>Synopsis: {film.synopsis}</p> */
+	export let title;
+	export let directors;
+	export let cast;
+	export let synopsis;
+	export let release;
+	export let close = false
+
 </script>
+<div id='film'>
+<p>Title: {title}</p>
+<p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()}.{release.toDate().getFullYear()}</p>
+<p>Directors: {directors}</p>
+<p>Cast: {cast}</p>
+<p>Synopsis: {synopsis}</p>
+</div>

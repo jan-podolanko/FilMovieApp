@@ -2,12 +2,14 @@
  	import { Timestamp } from 'firebase/firestore';
  	import { ref,uploadBytes } from 'firebase/storage';
  	import { fade } from 'svelte/transition';
+ 	import Film from './Film.svelte';
  	import { addFilm,showStuff,storage } from './firebase.js';
-
 
 	let title, synopsis, release, cast, directors, files, url;
 	let stuff = showStuff();
 	let shown = false;
+	let film;
+	let close = false;
 
 	function uploadPic(files){
 		const imgRef = ref(storage, `images/${files[0].name}`);
@@ -16,37 +18,17 @@
 	
 	function show(){
 		shown = !shown
-		let container = document.getElementById('film');
-		container.innerHTML = ''
+		close = false
 	}
 
-	function createDiv(variable){
-		let container = document.getElementById('film');
-		container.innerHTML = ''
-		let title = document.createElement('p');
-		title.innerHTML = 'Title: ' + variable.title;
-
-		let release = document.createElement('p');
-		release.innerHTML = 'Release date: ' + variable.release.toDate().getDate() + '.' + variable.release.toDate().getMonth() + '.' + variable.release.toDate().getFullYear();
-
-		let directors = document.createElement('p');
-		directors.innerHTML = 'Directors: ' + variable.directors;
-
-		let cast = document.createElement('p');
-		cast.innerHTML = 'Cast: ' + variable.cast;
-
-		let synopsis = document.createElement('p');
-		synopsis.style.textAlign = 'justify'
-		synopsis.innerHTML = 'Synopsis: ' + variable.synopsis;
-
-		container.append(title,release,directors,cast,synopsis);
-		let film_container = document.getElementById('film-container')
-		film_container.style.visibility = 'visible';
-	}
-
-	function hideInfo(){
-		let film_container = document.getElementById('film-container')
-		film_container.style.visibility = 'hidden';
+	function createFilmData(variable){
+		film = {
+			title: variable.title,
+			release: variable.release,
+			directors: variable.directors,
+			cast: variable.cast,
+			synopsis: variable.synopsis
+		}
 	}
 
 	function vibrate(){
@@ -66,7 +48,7 @@
 	{:then stuff}
 	<ul class="list-group">
 		{#each stuff as film}
-			<div on:click={()=>createDiv(film)} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
+			<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
 		{/each}
 	</ul>
 	{:catch error}
@@ -75,12 +57,22 @@
 	</div>
 	
 	<br>
-	<div id="film-container">
-	<div id="film"></div>
-	<button on:click={hideInfo} id='close-info' class="btn btn-primary material-symbols-outlined">
+	
+	{#if close}
+	<div transition:fade id="film-container">
+	{#if film}
+	<Film {...film}/>
+	{/if}
+	<button on:click={()=>{close = false}} id='close-info' class="btn btn-primary material-symbols-outlined">
 		expand_less
 	</button>
 	</div>
+	{/if}
+	
+	
+
+
+
 	{#if !shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>add</button>
 	{/if}
@@ -148,7 +140,7 @@
 	#film-container{
 		border: 1px solid #adb5bd;
 		border-radius: 5px;
-		visibility: hidden;
+		visibility: visible;
 		padding: 8px 13px;
 		/* transition:visibility 1s linear; */
 	}

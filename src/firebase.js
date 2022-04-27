@@ -1,7 +1,7 @@
 	// Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, query, setLogLevel as firestoreLogLevel } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, increment, updateDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,22 +24,29 @@ const analytics = getAnalytics(app);
 export const storage = getStorage(app);
 /* firestore().settings({ experimentalForceLongPolling: true });
  */
-export async function addFilm(title, release, cast, directors, synopsis, picture_url){
+export async function addFilm(title, release, cast, directors, synopsis){
   addDoc(collection(db, "films"), {
     title: title,
     release: release,
     cast: cast,
     directors: directors,
-    synopsis: synopsis,
-    picture: picture_url
+    synopsis: synopsis
+/*     likes: 0,
+    dislikes: 0 */
   });
-  
 }
+
+/* export async function updateLikes(film, like){
+  if(like > 0){
+    await updateDoc(film,{likes: increment(like)})
+  } else {
+    await updateDoc(film,{dislikes: increment(like)})
+  }
+} */
 
 export async function showStuff(){
   const docRef = collection(db, "films");
-  const q = query(collection(db, "films"));
-  const docSnap = await getDocs(q) //wczesniej bylo docRef zamaist q
+  const docSnap = await getDocs(docRef);
   const docList = docSnap.docs.map(doc => doc.data());
   console.log(docList)
   return docList
