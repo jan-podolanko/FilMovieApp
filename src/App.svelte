@@ -49,6 +49,12 @@
 		film_container.style.visibility = 'hidden';
 	}
 
+	function vibrate(){
+		navigator.vibrate([200,50,200]);
+		let audio = document.getElementById("audio");
+    audio.play();
+	}
+
 	//getDownloadURL(ref(storage,`images/${files[0]}`))
 </script>
 
@@ -87,8 +93,8 @@
 		{/if}
 		<form>
 			<div class="form-group">
-				<label for="inputTitle">Image</label>
-				<input type="file" class="form-control" id="file-input" bind:files>
+				<label for="inputTitle">Upload an image from your device or camera</label>
+				<input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
 			</div>
 			<div class="form-group">
 				<label for="inputTitle">Title</label>
@@ -111,9 +117,11 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
 			</div>
 		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)} action="#">Submit</button>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
+
+	<audio id="audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 
 </main>
 
