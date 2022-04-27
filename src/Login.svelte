@@ -23,6 +23,7 @@
         <div class="w-full max-w-xs">
             <div class="text-center">
             <h2>{$user.email}</h2>
+            <h2>{$user.id}</h2>
             <button type="button" class="mt-3" on:click={logout}>Logout</button>
             </div>
         </div>
