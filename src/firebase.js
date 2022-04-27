@@ -2,8 +2,8 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { addDoc, collection, getDocs, getFirestore, query, setLogLevel as firestoreLogLevel } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,25 +29,41 @@ export const auth = getAuth(app);
 
 /* firestore().settings({ experimentalForceLongPolling: true });
  */
-export async function addFilm(title, release, cast, directors, synopsis, picture_url){
-  addDoc(collection(db, "films"), {
+export async function addFilm(title, release, cast, directors, synopsis, files){
+  const doc = await addDoc(collection(db, "films"), {
     title: title,
     release: release,
     cast: cast,
     directors: directors,
-    synopsis: synopsis,
-    picture: picture_url
+    synopsis: synopsis
+/*     likes: 0,
+    dislikes: 0 */
   });
-  
+  console.log(doc.id)
+  const imgRef = ref(storage, `images/${doc.id}.jpeg`);
+  await uploadBytes(imgRef, files[0])
 }
+
+/* export async function updateLikes(film, like){
+  if(like > 0){
+    await updateDoc(film,{likes: increment(like)})
+  } else {
+    await updateDoc(film,{dislikes: increment(like)})
+  }
+} */
 
 export async function showStuff(){
   const docRef = collection(db, "films");
-  const q = query(collection(db, "films"));
-  const docSnap = await getDocs(q) //wczesniej bylo docRef zamaist q
-  const docList = docSnap.docs.map(doc => doc.data());
+  const docSnap = await getDocs(docRef);
+  const map = new Map()
+
+  const docList = docSnap.docs.map(doc => [doc.id, doc.data()]);
+
+  docSnap.docs.forEach(element => {
+    map.set(element.id, element.data())
+  });
   console.log(docList)
-  return docList
+  return map
 
 /*   const cities = [];
   const q = query(collection(db, "films"));

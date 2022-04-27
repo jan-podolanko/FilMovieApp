@@ -4,6 +4,7 @@
  	import { fade } from 'svelte/transition';
  	import { addFilm,showStuff,storage,auth } from './firebase.js';
   	import { initAuth } from './auth';
+	import Film from './Film.svelte';
 
 	const { loginWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
 
@@ -19,9 +20,11 @@
 	  	}
 	};
 
-	let title, synopsis, release, cast, directors, files, url;
+	let title, synopsis, release, cast, directors, files;
 	let stuff = showStuff();
 	let shown = false;
+	let film;
+	let close = false;
 
 	function uploadPic(files){
 		const imgRef = ref(storage, `images/${files[0].name}`);
@@ -30,40 +33,27 @@
 	
 	function show(){
 		shown = !shown
-		let container = document.getElementById('film');
-		container.innerHTML = ''
+		close = false
 	}
 
-	function createDiv(variable){
-		let container = document.getElementById('film');
-		container.innerHTML = ''
-		let title = document.createElement('p');
-		title.innerHTML = 'Title: ' + variable.title;
-
-		let release = document.createElement('p');
-		release.innerHTML = 'Release date: ' + variable.release.toDate().getDate() + '.' + variable.release.toDate().getMonth() + '.' + variable.release.toDate().getFullYear();
-
-		let directors = document.createElement('p');
-		directors.innerHTML = 'Directors: ' + variable.directors;
-
-		let cast = document.createElement('p');
-		cast.innerHTML = 'Cast: ' + variable.cast;
-
-		let synopsis = document.createElement('p');
-		synopsis.style.textAlign = 'justify'
-		synopsis.innerHTML = 'Synopsis: ' + variable.synopsis;
-
-		container.append(title,release,directors,cast,synopsis);
-		let film_container = document.getElementById('film-container')
-		film_container.style.visibility = 'visible';
+	function createFilmData(variable){
+		film = {
+			title: variable.title,
+			release: variable.release,
+			directors: variable.directors,
+			cast: variable.cast,
+			synopsis: variable.synopsis
+		}
 	}
 
-	function hideInfo(){
-		let film_container = document.getElementById('film-container')
-		film_container.style.visibility = 'hidden';
+	function vibrate(){
+		navigator.vibrate([200,50,200]);
+		let audio = document.getElementById("audio");
+    audio.play();
 	}
 
 	//getDownloadURL(ref(storage,`images/${files[0]}`))
+
 </script>
 
 <div class="wrapper">
@@ -122,8 +112,8 @@
 	<p>...waiting</p>
 	{:then stuff}
 	<ul class="list-group">
-		{#each stuff as film}
-			<div on:click={()=>createDiv(film)} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
+		{#each Array.from(stuff.values()) as film}
+			<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
 		{/each}
 	</ul>
 	{:catch error}
@@ -132,12 +122,22 @@
 	</div>
 	
 	<br>
-	<div id="film-container">
-	<div id="film"></div>
-	<button on:click={hideInfo} id='close-info' class="btn btn-primary material-symbols-outlined">
+	
+	{#if close}
+	<div transition:fade id="film-container">
+	{#if film}
+	<Film {...film}/>
+	{/if}
+	<button on:click={()=>{close = false}} id='close-info' class="btn btn-primary material-symbols-outlined">
 		expand_less
 	</button>
 	</div>
+	{/if}
+	
+	
+
+
+
 	{#if !shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>add</button>
 	{/if}
@@ -149,9 +149,15 @@
 		<button on:click={uploadPic(files)}>Upload image</button>
 		{/if}
 		<form>
-			<div class="form-group">
-				<label for="inputTitle">Image</label>
-				<input type="file" class="form-control" id="file-input" bind:files>
+			<div class="form-group row">
+				<div class="col-md">
+				<label for="inputTitle">Take a picture and upload</label>
+				<input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
+			</div>
+			<div class="col-md">
+				<label for="inputTitle">Upload an image from your device</label>
+				<input type="file" class="form-control" id="file-input" accept="image/*" bind:files>
+			</div>
 			</div>
 			<div class="form-group">
 				<label for="inputTitle">Title</label>
@@ -174,9 +180,11 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
 			</div>
 		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)} action="#">Submit</button>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis, files)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
+
+	<audio id="audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 
 </main>
 
@@ -203,7 +211,7 @@
 	#film-container{
 		border: 1px solid #adb5bd;
 		border-radius: 5px;
-		visibility: hidden;
+		visibility: visible;
 		padding: 8px 13px;
 		/* transition:visibility 1s linear; */
 	}
