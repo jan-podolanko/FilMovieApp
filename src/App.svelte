@@ -38,6 +38,7 @@
 	}
 
 	//getDownloadURL(ref(storage,`images/${files[0]}`))
+
 </script>
 
 <main>
@@ -47,7 +48,7 @@
 	<p>...waiting</p>
 	{:then stuff}
 	<ul class="list-group">
-		{#each stuff as film}
+		{#each Array.from(stuff.values()) as film}
 			<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
 		{/each}
 	</ul>
@@ -84,9 +85,15 @@
 		<button on:click={uploadPic(files)}>Upload image</button>
 		{/if}
 		<form>
-			<div class="form-group">
-				<label for="inputTitle">Upload an image from your device or camera</label>
+			<div class="form-group row">
+				<div class="col-md">
+				<label for="inputTitle">Take a picture and upload</label>
 				<input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
+			</div>
+			<div class="col-md">
+				<label for="inputTitle">Upload an image from your device</label>
+				<input type="file" class="form-control" id="file-input" accept="image/*" bind:files>
+			</div>
 			</div>
 			<div class="form-group">
 				<label for="inputTitle">Title</label>
@@ -109,7 +116,7 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
 			</div>
 		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis)} on:click={()=>vibrate()} action="#">Submit</button>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis, files)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
 
