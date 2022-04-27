@@ -1,8 +1,8 @@
 <script>
+    import { fade } from 'svelte/transition';
     import App from './App.svelte';
-	import { fade } from 'svelte/transition';
-	import { initAuth } from './auth';
-	import { auth } from './firebase.js';
+    import { initAuth } from './auth';
+    import { auth } from './firebase.js';
     const { loginWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
 
     let error = null;
@@ -68,6 +68,6 @@
         {/if}
     </div>
 {#if $user}
-    <App/>
+    <App user_id={$user.id}/>
 {/if}
 </main>
