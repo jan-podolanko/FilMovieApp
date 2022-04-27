@@ -23,7 +23,6 @@
         <div class="w-full max-w-xs">
             <div class="text-center">
             <h2>{$user.email}</h2>
-            <h2>{$user.id}</h2>
             <button type="button" class="mt-3" on:click={logout}>Logout</button>
             </div>
         </div>
@@ -39,7 +38,7 @@
                 bind:value={email}
                 id="email"
                 type="email"
-                placeholder="name@acme.com"
+                placeholder="name@gmail.com"
                 />
             </div>
             <div class="mb-6">
@@ -55,16 +54,15 @@
             {#if error}
                 <div transition:fade class="p-2 mb-6 bg-red-300">Wrong email or password</div>
             {/if}
-			<div class="btn-group">
-				<div class="mt-3">
-                    <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
-                </div>
-                <div class="mt-3">
-                    <button type="button" on:click|preventDefault={loginWithGoogle}>
-                    Sign In with Google
-                    </button>
-                </div>
-			</div>
+                <div class="btn-group">
+				    <div class="mt-3">
+                <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+            </div>
+            <div class="mt-3">
+                <button type="button" on:click|preventDefault={loginWithGoogle}>
+                Sign In with Google
+                </button>
+            </div>
             </form>
         </div>
         {/if}
