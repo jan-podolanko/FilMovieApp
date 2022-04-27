@@ -1,6 +1,6 @@
-import App from './App.svelte';
+import Login from './Login.svelte';
 
-const app = new App({
+const app = new Login({
 	target: document.body,
 	props: {
 	}
@@ -9,7 +9,7 @@ const app = new App({
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
 }
-/* new Login({
+/* const  Login({
 	target: document.body,
 	props: {
 	}
