@@ -106,86 +106,89 @@
 </div>
 
 <main>
-	<div id='list-container'>
-	<h3 class="display-6">All movies</h3>
-	{#await stuff}
-	<p>...waiting</p>
-	{:then stuff}
-	<ul class="list-group">
-		{#each Array.from(stuff.values()) as film}
-			<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
-		{/each}
-	</ul>
-	{:catch error}
-		{error}
-	{/await}
-	</div>
-	
-	<br>
-	
-	{#if close}
-	<div transition:fade id="film-container">
-	{#if film}
-	<Film {...film}/>
-	{/if}
-	<button on:click={()=>{close = false}} id='close-info' class="btn btn-primary material-symbols-outlined">
-		expand_less
-	</button>
-	</div>
-	{/if}
-	
-	
-
-
-
-	{#if !shown}
-	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>add</button>
-	{/if}
-
-	{#if shown}
-	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>close</button>
-	<div transition:fade>
-		{#if files}
-		<button on:click={uploadPic(files)}>Upload image</button>
+	{#if $user}
+		<div id='list-container'>
+		<h3 class="display-6">All movies</h3>
+		{#await stuff}
+		<p>...waiting</p>
+		{:then stuff}
+		<ul class="list-group">
+			{#each Array.from(stuff.values()) as film}
+				<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} id="film-list-item" class="list-group-item list-group-item-action" tabindex='0'>{film.title}</div>
+			{/each}
+		</ul>
+		{:catch error}
+			{error}
+		{/await}
+		</div>
+		
+		<br>
+		
+		{#if close}
+		<div transition:fade id="film-container">
+		{#if film}
+		<Film {...film}/>
 		{/if}
-		<form>
-			<div class="form-group row">
+		<button on:click={()=>{close = false}} id='close-info' class="btn btn-primary material-symbols-outlined">
+			expand_less
+		</button>
+		</div>
+		{/if}
+		
+		
+
+
+
+		{#if !shown}
+		<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>add</button>
+		{/if}
+
+		{#if shown}
+		<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>close</button>
+		<div transition:fade>
+			{#if files}
+			<button on:click={uploadPic(files)}>Upload image</button>
+			{/if}
+			<form>
+				<div class="form-group row">
+					<div class="col-md">
+					<label for="inputTitle">Take a picture and upload</label>
+					<input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
+				</div>
 				<div class="col-md">
-				<label for="inputTitle">Take a picture and upload</label>
-				<input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
-			</div>
-			<div class="col-md">
-				<label for="inputTitle">Upload an image from your device</label>
-				<input type="file" class="form-control" id="file-input" accept="image/*" bind:files>
-			</div>
-			</div>
-			<div class="form-group">
-				<label for="inputTitle">Title</label>
-				<input type="title" class="form-control" id="title-input" bind:value={title}>
-			</div>
-			<div class="form-group">
-				<label for="inputSynopsis">Release</label>
-				<input type="date" class="form-control" id="release-input" bind:value={release}>
-			</div>
-			<div class="form-group">
-				<label for="inputSynopsis">Directors</label>
-				<input type="synopsis" class="form-control" id="directors-input" bind:value={directors}>
-			</div>
-			<div class="form-group">
-				<label for="inputSynopsis">Cast</label>
-				<input type="synopsis" class="form-control" id="cast-input" bind:value={cast}>
-			</div>
-			<div class="form-group">
-				<label for="inputSynopsis">Synopsis</label>
-				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
-			</div>
-		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis, files)} on:click={()=>vibrate()} action="#">Submit</button>
-	</div>
+					<label for="inputTitle">Upload an image from your device</label>
+					<input type="file" class="form-control" id="file-input" accept="image/*" bind:files>
+				</div>
+				</div>
+				<div class="form-group">
+					<label for="inputTitle">Title</label>
+					<input type="title" class="form-control" id="title-input" bind:value={title}>
+				</div>
+				<div class="form-group">
+					<label for="inputSynopsis">Release</label>
+					<input type="date" class="form-control" id="release-input" bind:value={release}>
+				</div>
+				<div class="form-group">
+					<label for="inputSynopsis">Directors</label>
+					<input type="synopsis" class="form-control" id="directors-input" bind:value={directors}>
+				</div>
+				<div class="form-group">
+					<label for="inputSynopsis">Cast</label>
+					<input type="synopsis" class="form-control" id="cast-input" bind:value={cast}>
+				</div>
+				<div class="form-group">
+					<label for="inputSynopsis">Synopsis</label>
+					<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis}>
+				</div>
+			</form>
+			<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis, files)} on:click={()=>vibrate()} action="#">Submit</button>
+		</div>
+		{/if}
+
+		<audio id="audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+	{:else}
+		<div></div>
 	{/if}
-
-	<audio id="audio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
-
 </main>
 
 
