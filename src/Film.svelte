@@ -73,12 +73,14 @@
 	}
 	#image{
 		width: 80%;
+		padding: 10px;
 	}
 
 	#counter{
 		display: inline-block;
 		vertical-align: middle;
 		line-height: normal;
+		width: 10%;
 	}
 
 	#title{
@@ -91,7 +93,7 @@
 
 	#film{
 		position: relative;
-		background-color: #e6e6e6;
+		background-color: #f7f7f7;
 		padding-bottom: 5px;
 	}
 
