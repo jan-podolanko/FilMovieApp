@@ -158,6 +158,10 @@
   *{
 		font-family: 'Lato', sans-serif;
 	}
+
+  form  { display: table;      }
+  label { display: table-cell; }
+  input { display: table-cell; }
 button{
   margin: 2px;
 }  
