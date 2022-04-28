@@ -68,11 +68,14 @@
   {/if}
 </div>
 {#if $user}
-  <App user_id={$user.id}/>
+  <App user_id={$user.id} user_email={$user.email}/>
 {/if}
 </main>
 
 <style>
+  *{
+		font-family: 'Lato', sans-serif;
+	}
 button{
   margin: 2px;
 }  
