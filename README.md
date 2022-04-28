@@ -1,5 +1,5 @@
 # FilMovieApp
-App by Jan Podolanko, Michał Rusinowski and Emil Stolarczyk
+### App by Jan Podolanko, Michał Rusinowski and Emil Stolarczyk
 
 <br>
 <br>
