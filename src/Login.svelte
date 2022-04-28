@@ -91,7 +91,7 @@
             </div>
             <div class="btn-group">
                 <div class="mt-3">
-            <button type="button" on:click={show}>Sign Up form</button>
+            <button class="btn btn-primary" type="button" on:click={show}>Sign Up form</button>
             </div>
             </form>
         </div>
