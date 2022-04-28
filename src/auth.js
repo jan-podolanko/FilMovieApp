@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth';
 import { readable } from 'svelte/store';
 import { auth } from './firebase.js';
 
@@ -16,6 +16,9 @@ export const initAuth = (useRedirect = false) => {
   
   const loginWithEmailPassword = (auth, email, password) =>
     signInWithEmailAndPassword(auth, email, password);
+  
+  const signUpWithEmailPassword = (auth, email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
   
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();

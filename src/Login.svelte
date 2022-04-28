@@ -3,11 +3,20 @@
     import App from './App.svelte';
     import { initAuth } from './auth';
     import { auth } from './firebase.js';
-    const { loginWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
+    import { createUserWithEmailAndPassword } from 'firebase/auth';
+    const { loginWithEmailPassword, signUpWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
 
     let error = null;
     let email = "";
     let password = "";
+    let spassword = "";
+    let scpassword = "";
+    let semail = "";
+    let shown = false;
+    let showerror = false;
+    function show() {
+        shown = !shown
+    };
     const loginHandler = async event => {
       try {
         error = null;
@@ -15,6 +24,23 @@
      } catch (err) {
         error = err;
       }
+    };
+    const signUpHandler = async () => {
+      try {
+        error = null;
+        await createUserWithEmailAndPassword( auth, semail, spassword);
+     } catch (err) {
+        error = err;
+      }
+    };
+    function checkpassword() {
+        if(scpassword===spassword){
+            signUpHandler()
+            show()
+        }
+        else {
+            showerror = true
+        }
     };
 </script>
 <main>
@@ -26,7 +52,7 @@
             <button type="button" class="mt-3" on:click={logout}>Logout</button>
             </div>
         </div>
-        {:else}
+        {:else if !shown}
         <div class="row align-items-center justify-content-center">
             <form
             class="px-8 pt-6 pb-8 bg-white shadow-md"
@@ -52,7 +78,7 @@
                 />
             </div>
             {#if error}
-                <div transition:fade class="p-2 mb-6 bg-red-300">Wrong email or password</div>
+                <div transition:fade class="p-2 mb-6 bg-red-300">{error.message}</div>
             {/if}
                 <div class="btn-group">
 				    <div class="mt-3">
@@ -63,10 +89,66 @@
                 Sign In with Google
                 </button>
             </div>
+            <div class="btn-group">
+                <div class="mt-3">
+            <button type="button" on:click={show}>Sign Up form</button>
+            </div>
             </form>
         </div>
+
+
+        {:else if shown}
+        <div class="row align-items-center justify-content-center">
+            <form
+            class="px-8 pt-6 pb-8 bg-white shadow-md"
+            >
+            <div class="mb-4">
+                <label for="email">Email</label>
+                <input
+                class="input-field"
+                bind:value={semail}
+                id="email"
+                type="email"
+                placeholder="name@gmail.com"
+                />
+            </div>
+            <div class="mb-6">
+                <label for="password">Password</label>
+                <input
+                class="input-field"
+                bind:value={spassword}
+                id="password"
+                type="password"
+                placeholder="******************"
+                />
+            </div>
+            <div class="mb-6">
+                <label for="scpassword">Confirm Password</label>
+                <input
+                class="input-field"
+                bind:value={scpassword}
+                id="scpassword"
+                type="password"
+                placeholder="******************"
+                />
+            </div>
+            {#if error}
+                <div transition:fade class="p-2 mb-6 bg-red-300">{error.message}</div>
+            {/if}
+            <div class="btn-group">
+                <div class="mt-3">
+            <button type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
+            </div>
+            <div class="btn-group">
+                <div class="mt-3">
+            <button type="button" on:click={show}>Back</button>
+            </div>
+        </form>
+        {#if showerror}
+        <div>Wrong password</div>
         {/if}
-    </div>
+        </div>
+        {/if}
 {#if $user}
     <App user_id={$user.id}/>
 {/if}
