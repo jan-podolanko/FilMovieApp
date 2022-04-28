@@ -4,7 +4,7 @@
 	import Film from './Film.svelte';
 	import { addFilm,showStuff } from './firebase.js';
 	
-	export let user_id;
+	export let user_id, user_email;
 	let title, synopsis, release, cast, directors, files;
 	let stuff = showStuff();
 	let shown = false;
@@ -27,7 +27,8 @@
 			currentUser: user_id,
 			uploadId: variable.user_id,
 			likes: variable.likes,
-			dislikes: variable.dislikes
+			dislikes: variable.dislikes,
+			email: user_email
 		}
 	}
 
@@ -37,10 +38,7 @@
     audio.play();
 	}
 
-	//getDownloadURL(ref(storage,`images/${files[0]}`))
-
 </script>
-
 
 <main>
 	<div id='list-container'>
@@ -57,7 +55,7 @@
 		{error}
 	{/await}
 	</div>
-		
+
 	<br>
 		
 	{#if close}
@@ -71,9 +69,6 @@
 	</div>
 	{/if}
 		
-		
-
-
 
 	{#if !shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>add</button>
@@ -123,6 +118,9 @@
 
 
 <style>
+	*{
+		font-family: 'Lato', sans-serif;
+	}
 	main {
 		text-align: center;
 		padding: 1em;
@@ -130,22 +128,13 @@
 		margin: 0 auto;
 	}
 
-/* 	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	} */
-
-/* 	#film{
-		
-	} */
-
 	#film-container{
 		border: 1px solid #adb5bd;
 		border-radius: 5px;
 		visibility: visible;
 		padding: 8px 13px;
+		max-width: 600px;
+		margin: auto;
 		/* transition:visibility 1s linear; */
 	}
 	#film-list-item{
@@ -167,9 +156,10 @@
 	#close-info{
 		width: 100%;
 	}
+
 	@media (min-width: 640px) {
 		main {
-			max-width: none;
+			max-width: 600px;
 		}
 	}
 </style>
