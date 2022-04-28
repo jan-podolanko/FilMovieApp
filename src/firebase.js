@@ -29,7 +29,7 @@ export const auth = getAuth(app);
 
 /* firestore().settings({ experimentalForceLongPolling: true });
  */
-export async function addFilm(title, release, cast, directors, synopsis, files, id){
+export async function addFilm(title, release, cast, directors, synopsis, files, id, email){
   const doc = await addDoc(collection(db, "films"), {
     title: title,
     release: release,
@@ -38,7 +38,8 @@ export async function addFilm(title, release, cast, directors, synopsis, files, 
     synopsis: synopsis,
     likes: 0,
     dislikes: 0,
-    user_id: id
+    user_id: id,
+    user_email: email
   });
   console.log(doc.id)
   const imgRef = ref(storage, `images/${doc.id}.jpeg`);

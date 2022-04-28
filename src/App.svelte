@@ -28,7 +28,7 @@
 			uploadId: variable.user_id,
 			likes: variable.likes,
 			dislikes: variable.dislikes,
-			email: user_email
+			email: variable.user_email
 		}
 	}
 
@@ -109,7 +109,7 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis} aria-required="true">
 			</div>
 		</form>
-		<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id)} on:click={()=>vibrate()} action="#">Submit</button>
+		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id,user_email)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
 	
