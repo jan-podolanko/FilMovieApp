@@ -19,6 +19,7 @@
 			await deleteDoc(doc(db, "films", id))
 		}
 		console.log(sure)
+		  setTimeout(function () {window.location.reload();}, 500);
 	}
 
 	$: getDownloadURL(ref(storage, `images/${id}.jpeg`)).then((url) =>{
