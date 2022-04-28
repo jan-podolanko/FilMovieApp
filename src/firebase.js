@@ -44,6 +44,7 @@ export async function addFilm(title, release, cast, directors, synopsis, files, 
   console.log(doc.id)
   const imgRef = ref(storage, `images/${doc.id}.jpeg`);
   await uploadBytes(imgRef, files[0])
+  setTimeout(function () {window.location.reload();}, 500);
 }
 
 /*  */
