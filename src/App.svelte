@@ -90,23 +90,23 @@
 			</div>
 			<div class="form-group">
 				<label for="inputTitle">Title</label>
-				<input type="title" class="form-control" id="title-input" bind:value={title} ariarequired>
+				<input type="title" class="form-control" id="title-input" bind:value={title} aria-required="true">
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Release</label>
-				<input type="date" class="form-control" id="release-input" bind:value={release} ariarequired>
+				<input type="date" class="form-control" id="release-input" bind:value={release} aria-required="true">
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Directors</label>
-				<input type="synopsis" class="form-control" id="directors-input" bind:value={directors} ariarequired>
+				<input type="synopsis" class="form-control" id="directors-input" bind:value={directors} aria-required="true">
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Cast</label>
-				<input type="synopsis" class="form-control" id="cast-input" bind:value={cast} ariarequired>
+				<input type="synopsis" class="form-control" id="cast-input" bind:value={cast} aria-required="true">
 			</div>
 			<div class="form-group">
 				<label for="inputSynopsis">Synopsis</label>
-				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis} ariarequired>
+				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis} aria-required="true">
 			</div>
 		</form>
 		<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id)} on:click={()=>vibrate()} action="#">Submit</button>
