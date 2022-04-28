@@ -109,7 +109,7 @@
 				<input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis} ariarequired>
 			</div>
 		</form>
-		<button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id)} on:click={()=>vibrate()} action="#">Submit</button>
+		<button type="submit" class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id)} on:click={()=>vibrate()} action="#">Submit</button>
 	</div>
 	{/if}
 	
