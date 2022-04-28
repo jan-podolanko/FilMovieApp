@@ -34,7 +34,7 @@
 <br>
 <div class="spacer"></div>
 <img id="image" alt="Movie">
-<p id="title">Title: {title}</p>
+<p id="title">{title}</p>
 <p id="uploader">Uploaded by: {email}</p>
 <p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()}.{release.toDate().getFullYear()}</p>
 <p>Directors: {directors}</p>
