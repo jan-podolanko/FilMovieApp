@@ -1,9 +1,9 @@
 <script>
+    import { createUserWithEmailAndPassword } from 'firebase/auth';
     import { fade } from 'svelte/transition';
     import App from './App.svelte';
     import { initAuth } from './auth';
     import { auth } from './firebase.js';
-    import { createUserWithEmailAndPassword } from 'firebase/auth';
     const { loginWithEmailPassword, signUpWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
 
     let error = null;
@@ -137,11 +137,11 @@
             {/if}
             <div class="btn-group">
                 <div class="mt-3">
-            <button type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
+            <button class="btn btn-primary" type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
             </div>
             <div class="btn-group">
                 <div class="mt-3">
-            <button type="button" on:click={show}>Back</button>
+            <button class="btn btn-primary" type="button" on:click={show}>Back</button>
             </div>
         </form>
         {#if showerror}
