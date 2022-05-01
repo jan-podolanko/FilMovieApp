@@ -1,6 +1,6 @@
 <script>
 	import { deleteDoc,doc,increment,updateDoc } from "firebase/firestore";
-	import { getDownloadURL,ref } from "firebase/storage";
+	import { deleteObject, getDownloadURL,ref } from "firebase/storage";
 	import { db,storage } from './firebase.js';
 	export let title, directors, cast, synopsis, release, id, currentUser, uploadId, likes, dislikes, email;
 	export let close = false;
@@ -17,6 +17,7 @@
 		let sure = confirm("Are you sure?");
 		if(sure){
 			await deleteDoc(doc(db, "films", id))
+			deleteObject(ref(storage, `images/${id}.jpeg`))
 		}
 		console.log(sure)
 		  setTimeout(function () {window.location.reload();}, 500);

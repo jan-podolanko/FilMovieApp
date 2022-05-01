@@ -2,7 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, onSnapshot } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,8 +27,6 @@ export const storage = getStorage(app);
 // get the firebase auth object
 export const auth = getAuth(app);
 
-/* firestore().settings({ experimentalForceLongPolling: true });
- */
 export async function addFilm(title, release, cast, directors, synopsis, files, id, email){
   const doc = await addDoc(collection(db, "films"), {
     title: title,
@@ -44,10 +42,7 @@ export async function addFilm(title, release, cast, directors, synopsis, files, 
   console.log(doc.id)
   const imgRef = ref(storage, `images/${doc.id}.jpeg`);
   await uploadBytes(imgRef, files[0])
-  setTimeout(function () {window.location.reload();}, 500);
 }
-
-/*  */
 
 export async function showStuff(){
   const docRef = collection(db, "films");
@@ -60,8 +55,32 @@ export async function showStuff(){
   return docList
 }
 
+//w.i.p. -> this shit function below
+export async function showStuff2(){
+  const docRef = collection(db, "films");
+  let docList = [];
+  let flag;
+  flag = true
+  return new Promise((resolve, reject) => {
+    const unsub = onSnapshot(docRef, (querySnapshot) =>{
+    
+      querySnapshot.forEach((doc) => {
+        docList.push({id:doc.id, ...doc.data()});
+        resolve()
+      });
+      /* return {id:doc.id, ...doc.data()} */
+    });
+    /* const docList = docSnap.docs.map(doc => {
+      return {id:doc.id, ...doc.data()}
+    }); */
+  
+    console.log(docList)
+    return docList
+  });
+  /* const docSnap = await getDocs(docRef) */
+  
+}
 
-//uploadBytes(ref(storage, `images/${files[0].name}`), files[0])
 //firestoreLogLevel("debug");
 
 export const db = getFirestore(app, { useFetchStreams: false, experimentalAutoDetectLongPolling: true }); 

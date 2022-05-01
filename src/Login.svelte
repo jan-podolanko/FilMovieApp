@@ -52,57 +52,52 @@
             <button type="button" class="mt-3 btn btn-primary" on:click={logout}>Logout</button>
             </div>
         </div>
-        {:else if !shown}
-        <div class="row align-items-center justify-content-center">
-            <form
-            class="px-8 pt-6 pb-8 bg-white shadow-md"
-            >
-            <div class="mb-4">
-                <label for="email">Email</label>
-                <input
-                class="input-field"
-                bind:value={email}
-                id="email"
-                type="email"
-                placeholder="name@gmail.com"
-                />
+        {:else if !shown}        
+        <div class="log-in-container">
+            <div id="app-name">
+                <img src="icon.png" alt="Logo">
+                <div>FilMovieApp</div>
             </div>
-            <div class="mb-4">
-                <label for="password">Password</label>
-                <input
-                class="input-field"
-                bind:value={password}
-                id="password"
-                type="password"
-                placeholder="******************"
-                />
-            </div>
-            {#if error}
-                <div transition:fade class="p-2 mb-6 bg-red-300">{error.message}</div>
-            {/if}
-          <div class="btn-group">
-				    <div class="mt-3">
-                <button type="button" class="btn btn-primary" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
-            </div>
-            <div class="mt-3">
-                <button type="button" class="btn btn-primary" on:click|preventDefault={loginWithGoogle}>
-                Sign In with Google
-                </button>
-            </div>
-            <div class="btn-group">
-                <div class="mt-3">
-            <button class="btn btn-primary" type="button" on:click={show}>Sign Up form</button>
-            </div>
+            <form>
+                <div class="input-field">
+                    <label for="email">Email</label>
+                    <input
+                    class="input-field"
+                    bind:value={email}
+                    id="email"
+                    type="email"
+                    placeholder="name@gmail.com"
+                    />
+                </div>
+                <div class="input-field">
+                    <label for="password">Password</label>
+                    <input
+                    class="input-field"
+                    bind:value={password}
+                    id="password"
+                    type="password"
+                    placeholder="*****************"
+                    />
+                </div>
+                {#if error}
+                    <div class="error-message" transition:fade>{error.message}</div>
+                {/if}
+                <div>
+                    <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+                    <button type="button" on:click|preventDefault={loginWithGoogle}>Sign In with Google</button>
+                    <button type="button" on:click={show}>Sign Up</button>
+                </div>
             </form>
         </div>
 
-
         {:else if shown}
-        <div class="row align-items-center justify-content-center">
-            <form
-            class="px-8 pt-6 pb-8 bg-white shadow-md"
-            >
-            <div class="mb-4">
+        <div class="log-in-container">
+            <div id="app-name">
+                <img src="icon.png" alt="Logo">
+                <div>FilMovieApp</div>
+            </div>
+            <form>
+            <div class="input-field">
                 <label for="email">Email</label>
                 <input
                 class="input-field"
@@ -112,7 +107,7 @@
                 placeholder="name@gmail.com"
                 />
             </div>
-            <div class="mb-6">
+            <div class="input-field">
                 <label for="password">Password</label>
                 <input
                 class="input-field"
@@ -122,7 +117,7 @@
                 placeholder="******************"
                 />
             </div>
-            <div class="mb-6">
+            <div class="input-field">
                 <label for="scpassword">Confirm Password</label>
                 <input
                 class="input-field"
@@ -133,19 +128,15 @@
                 />
             </div>
             {#if error}
-                <div transition:fade class="p-2 mb-6 bg-red-300">{error.message}</div>
+                <div transition:fade class="error-message">{error.message}</div>
             {/if}
-            <div class="btn-group">
-                <div class="mt-3">
-            <button class="btn btn-primary" type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
-            </div>
-            <div class="btn-group">
-                <div class="mt-3">
-            <button class="btn btn-primary" type="button" on:click={show}>Back</button>
+            <div>
+                <button type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
+                <button type="button" on:click={show}>Back</button>
             </div>
         </form>
         {#if showerror}
-        <div>Wrong password</div>
+        <div class="error-message">Wrong password</div>
         {/if}
         </div>
         {/if}
@@ -153,16 +144,3 @@
   <App user_id={$user.id} user_email={$user.email}/>
 {/if}
 </main>
-
-<style>
-  *{
-		font-family: 'Lato', sans-serif;
-	}
-
-  form  { display: table;      }
-  label { display: table-cell; }
-  input { display: table-cell; }
-button{
-  margin: 2px;
-}  
-</style>

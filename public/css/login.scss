@@ -1,0 +1,86 @@
+$primary: #5d04fc;
+$on-primary: #ffffff;
+$primary-container: #9b49ff;
+$on-primary-container: #0066af;
+$primary-light-variant: #9b49ff;
+$primary-dark-variant: #0000c7;
+$error: rgb(180, 0, 0);
+
+
+*{
+  font-family: 'Jost', sans-serif;
+}
+
+//Sign In and Sign Up forms
+.log-in-container{
+  border: solid 5px $primary;
+  background-color: #ffffff;
+  color: $primary;
+  max-width: fit-content;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 10px 30px;
+  margin-top: 10%;
+
+  #app-name{
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+    color: black;
+
+    img{
+      width: 40%;
+    }
+  }
+  .error-message{
+    color: $error;
+    display: block;
+    border: 2px solid $error;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  button{
+    border-radius: 5px;
+    background-color: $primary;
+    color: $on-primary;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  button:hover{
+    background-color: $primary-dark-variant;
+    cursor: pointer;
+    color: $on-primary;
+  }
+
+  .input-field{
+    margin: 10px;
+    display: block;
+    border-radius: 5px;
+    padding: 5px;
+    
+    label{
+      text-align: center;
+      display: block;
+      margin: 5px;
+      font-weight: 500;
+      font-size: large;
+    }
+    
+    input{
+      display: block;
+      width: 100%;
+      margin: auto;
+      text-align: center;
+    }
+
+    input:focus{
+      outline: 1px solid $primary;
+    }
+  }
+}
+
+//Film view

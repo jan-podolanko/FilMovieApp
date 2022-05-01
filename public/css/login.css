@@ -1,0 +1,68 @@
+* {
+  font-family: "Jost", sans-serif;
+}
+
+.log-in-container {
+  border: solid 5px #5d04fc;
+  background-color: #ffffff;
+  color: #5d04fc;
+  max-width: fit-content;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 10px 30px;
+  margin-top: 10%;
+}
+.log-in-container #app-name {
+  text-align: center;
+  font-size: larger;
+  font-weight: 700;
+  color: black;
+}
+.log-in-container #app-name img {
+  width: 40%;
+}
+.log-in-container .error-message {
+  color: rgb(180, 0, 0);
+  display: block;
+  border: 2px solid rgb(180, 0, 0);
+  border-radius: 5px;
+  padding: 5px;
+}
+.log-in-container button {
+  border-radius: 5px;
+  background-color: #5d04fc;
+  color: #ffffff;
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+}
+.log-in-container button:hover {
+  background-color: #0000c7;
+  cursor: pointer;
+  color: #ffffff;
+}
+.log-in-container .input-field {
+  margin: 10px;
+  display: block;
+  border-radius: 5px;
+  padding: 5px;
+}
+.log-in-container .input-field label {
+  text-align: center;
+  display: block;
+  margin: 5px;
+  font-weight: 500;
+  font-size: large;
+}
+.log-in-container .input-field input {
+  display: block;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+.log-in-container .input-field input:focus {
+  outline: 1px solid #5d04fc;
+}
+
+/*# sourceMappingURL=login.css.map */
