@@ -1,7 +1,5 @@
 $primary: #2E1440;
 $on-primary: #FFFFFF;
-$primary-container: #0000c7;
-$on-primary-container: #d6c0fd;
 $primary-light-variant: #531b6b;
 $secondary: #f2e30f;
 $on-secondary: #000000;
@@ -14,16 +12,20 @@ $error: rgb(180, 0, 0);
 }
 
 //Sign In and Sign Up forms
+.hide-scroll{
+  overflow: hidden;
+}
+
 .log-in-container{
   border: solid 5px $primary;
-  //background-color: $primary-container;
-  background: $primary;
+  background-color: $primary;
   color: #ffffff;
-  max-width: fit-content;
+  width: 90%;
   margin: 0 auto;
   border-radius: 10px;
   padding: 10px 30px;
   margin-top: 10%;
+  font-size: large;
 
   #app-name{
     text-align: center;
@@ -46,25 +48,27 @@ $error: rgb(180, 0, 0);
   .buttons{
     margin: auto;
     display: flex;
-    width: 160px;
+    width: 200px;
     #sign-in{
       margin-left: 0;
+      width: 90px;
     }
     #sign-up{
       margin-right: 0;
+      width: 90px;
     }
     #register{
-      width: 75px;
+      width: 90px;
       margin-left: 0;
     }
     #back{
-      width: 75px;
+      width: 90px;
       margin-right: 0;
     }
   }
 
   #sign-in-google{
-    width: 160px
+    width: 200px
   }
   
   button{
@@ -90,14 +94,6 @@ $error: rgb(180, 0, 0);
     border-radius: 5px;
     padding: 5px;
     
-    label{
-      text-align: center;
-      display: block;
-      margin: 5px;
-      font-weight: 500;
-      font-size: large;
-    }
-    
     input{
       display: block;
       width: 100%;
@@ -118,3 +114,143 @@ $error: rgb(180, 0, 0);
 }
 
 //Film view
+body{
+  background-color: $primary;
+  color: $on-primary;
+
+  main{
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+  
+    .film-list-item{
+      background-color: $primary-light-variant;
+      color: #ffffff;
+      width: 100%;
+      border-radius: 10px;
+      padding: 15px 5px;
+      margin: 5px auto;
+    }
+
+    .film-list-item:focus{
+      background-color: $secondary;
+      color: $on-secondary;
+    }
+
+    #add-movie-button{
+      position:fixed;
+      padding: 20px;
+      bottom: 5px;
+      right: 5px;
+      border-color: $secondary-variant;
+      border-radius: 50%;
+      background-color: $secondary-variant;
+      color: $on-secondary;
+      font-size: 32px;
+    }
+
+    #film-container{
+      border-radius: 10px;
+      padding: 10px 15px;
+      max-width: 600px;
+      margin: auto;
+      background-color: $primary-light-variant;
+    
+      #film-poster{
+        border: 5px solid $primary;
+        border-radius: 10px;
+        max-width: 90%;
+      }
+
+      .like-container{
+        display: flex;
+      }
+
+      button{
+        border-radius: 5px;
+        background-color: $secondary;
+        color: $on-secondary;
+        text-align: center;
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        border: 0;
+      }
+    
+      button:hover{
+        background-color: $primary;
+        cursor: pointer;
+        color: $on-primary;
+      }
+
+      #close-info{
+        width: 100%;
+      }
+    }
+
+    #add-film-container{
+      background-color: $primary-light-variant;
+      color: $on-primary;
+      border-radius: 10px;
+      padding: 10px 15px;
+
+      #add-pictures{
+        display: flex;
+      }
+
+      .add-film-row{
+        display: block;
+        margin: 10px auto;
+        
+        label{
+          margin-top: 10px;
+          margin-bottom: 0px;
+        }
+
+        input{
+          display: block;
+          width: 100%;
+          margin: 0 auto;
+          text-align: center;
+          outline: 0;
+          background-color: $primary-light-variant;
+          border-width: 0 0 2px;
+          border-radius: 0;
+          color: #ffffff;
+        }
+    
+        input:focus{
+          background-color: $primary-light-variant;
+          border-color: $secondary;
+        }
+      }
+
+      button{
+        border-radius: 5px;
+        background-color: $secondary;
+        color: $on-secondary;
+        text-align: center;
+        display: block;
+        margin: 20px 0px auto;
+        padding: 12px;
+        border: 0;
+        width: 100%;
+      }
+    
+      button:hover{
+        background-color: $primary;
+        cursor: pointer;
+        color: $on-primary;
+      }
+    }
+  }
+}
+
+/*
+	
+
+	
+
+	
+
+*/

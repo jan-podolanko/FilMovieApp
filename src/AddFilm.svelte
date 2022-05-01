@@ -1,6 +1,6 @@
 <script>
   import { Timestamp } from 'firebase/firestore';
-  import { fade } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
   import { addFilm } from "./firebase";
   let title, synopsis, release, cast, directors, files;
   export let user_email, user_id
@@ -13,38 +13,43 @@
 
 </script>
 
-<div transition:fade>
+<div transition:slide|local id="add-film-container">
   <form>
-    <div class="form-group row">
-      <div class="col-md">
-      <label for="inputTitle">Take a picture and upload</label>
-      <input type="file" class="form-control" id="file-input" accept="image/*" capture="environment" bind:files>
+    {#if !files}
+    <div class="add-film-row" id="add-pictures">
+      <div>
+        <label for="inputTitle">Take a picture</label>
+        <input type="file" id="file-input" accept="image/*" capture="environment" bind:files>
+      </div>
+      <div>
+        <label for="inputTitle">Upload an image</label>
+        <input type="file" id="file-input" accept="image/*" bind:files>
+      </div>
     </div>
-    <div class="col-md">
-      <label for="inputTitle">Upload an image from your device</label>
-      <input type="file" class="form-control" id="file-input" accept="image/*" bind:files>
-    </div>
-    </div>
-    <div class="form-group">
+    {:else}
+    <img src={files[0]} alt="Chosen poster">
+    <!--to read: https://svelte.dev/repl/b5333059a2f548809a3ac3f60a17a8a6?version=3.31.2-->
+    {/if}
+    <div class="add-film-row">
       <label for="inputTitle">Title</label>
-      <input type="title" class="form-control" id="title-input" bind:value={title} aria-required="true">
+      <input placeholder="Movie Title" type="title" id="title-input" bind:value={title} aria-required="true">
     </div>
-    <div class="form-group">
+    <div class="add-film-row">
       <label for="inputSynopsis">Release</label>
-      <input type="date" class="form-control" id="release-input" bind:value={release} aria-required="true">
+      <input type="date" id="release-input" bind:value={release} aria-required="true">
     </div>
-    <div class="form-group">
+    <div class="add-film-row">
       <label for="inputSynopsis">Directors</label>
-      <input type="synopsis" class="form-control" id="directors-input" bind:value={directors} aria-required="true">
+      <input placeholder="Director 1, Director 2, Director 3..." type="synopsis" id="directors-input" bind:value={directors} aria-required="true">
     </div>
-    <div class="form-group">
+    <div class="add-film-row">
       <label for="inputSynopsis">Cast</label>
-      <input type="synopsis" class="form-control" id="cast-input" bind:value={cast} aria-required="true">
+      <input placeholder="Actor 1, Actor 2, Actor 3..." type="synopsis" id="cast-input" bind:value={cast} aria-required="true">
     </div>
-    <div class="form-group">
+    <div class="add-film-row">
       <label for="inputSynopsis">Synopsis</label>
-      <input type="synopsis" class="form-control" id="synopsis-input" bind:value={synopsis} aria-required="true">
+      <input placeholder="What happens in the movie" type="synopsis" id="synopsis-input" bind:value={synopsis} aria-required="true">
     </div>
   </form>
-  <button class="btn btn-primary" on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id,user_email)} on:click={()=>vibrate()} action="#">Submit</button>
+  <button on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id,user_email)} on:click={()=>vibrate()} action="#">Submit</button>
 </div>

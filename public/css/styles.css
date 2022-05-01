@@ -2,15 +2,20 @@
   font-family: "Jost", sans-serif;
 }
 
+.hide-scroll {
+  overflow: hidden;
+}
+
 .log-in-container {
   border: solid 5px #2E1440;
-  background: #2E1440;
+  background-color: #2E1440;
   color: #ffffff;
-  max-width: fit-content;
+  width: 90%;
   margin: 0 auto;
   border-radius: 10px;
   padding: 10px 30px;
   margin-top: 10%;
+  font-size: large;
 }
 .log-in-container #app-name {
   text-align: center;
@@ -31,24 +36,26 @@
 .log-in-container .buttons {
   margin: auto;
   display: flex;
-  width: 160px;
+  width: 200px;
 }
 .log-in-container .buttons #sign-in {
   margin-left: 0;
+  width: 90px;
 }
 .log-in-container .buttons #sign-up {
   margin-right: 0;
+  width: 90px;
 }
 .log-in-container .buttons #register {
-  width: 75px;
+  width: 90px;
   margin-left: 0;
 }
 .log-in-container .buttons #back {
-  width: 75px;
+  width: 90px;
   margin-right: 0;
 }
 .log-in-container #sign-in-google {
-  width: 160px;
+  width: 200px;
 }
 .log-in-container button {
   border-radius: 5px;
@@ -71,13 +78,6 @@
   border-radius: 5px;
   padding: 5px;
 }
-.log-in-container .input-field label {
-  text-align: center;
-  display: block;
-  margin: 5px;
-  font-weight: 500;
-  font-size: large;
-}
 .log-in-container .input-field input {
   display: block;
   width: 100%;
@@ -93,5 +93,128 @@
   background-color: #2E1440;
   border-color: #f2e30f;
 }
+
+body {
+  background-color: #2E1440;
+  color: #FFFFFF;
+}
+body main {
+  max-width: 300px;
+  text-align: center;
+  margin: 0 auto;
+}
+body main .film-list-item {
+  background-color: #531b6b;
+  color: #ffffff;
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px 5px;
+  margin: 5px auto;
+}
+body main .film-list-item:focus {
+  background-color: #f2e30f;
+  color: #000000;
+}
+body main #add-movie-button {
+  position: fixed;
+  padding: 20px;
+  bottom: 5px;
+  right: 5px;
+  border-color: #f2a516;
+  border-radius: 50%;
+  background-color: #f2a516;
+  color: #000000;
+  font-size: 32px;
+}
+body main #film-container {
+  border-radius: 10px;
+  padding: 10px 15px;
+  max-width: 600px;
+  margin: auto;
+  background-color: #531b6b;
+}
+body main #film-container #film-poster {
+  border: 5px solid #2E1440;
+  border-radius: 10px;
+  max-width: 90%;
+}
+body main #film-container .like-container {
+  display: flex;
+}
+body main #film-container button {
+  border-radius: 5px;
+  background-color: #f2e30f;
+  color: #000000;
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  border: 0;
+}
+body main #film-container button:hover {
+  background-color: #2E1440;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+body main #film-container #close-info {
+  width: 100%;
+}
+body main #add-film-container {
+  background-color: #531b6b;
+  color: #FFFFFF;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+body main #add-film-container #add-pictures {
+  display: flex;
+}
+body main #add-film-container .add-film-row {
+  display: block;
+  margin: 10px auto;
+}
+body main #add-film-container .add-film-row label {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+body main #add-film-container .add-film-row input {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  outline: 0;
+  background-color: #531b6b;
+  border-width: 0 0 2px;
+  border-radius: 0;
+  color: #ffffff;
+}
+body main #add-film-container .add-film-row input:focus {
+  background-color: #531b6b;
+  border-color: #f2e30f;
+}
+body main #add-film-container button {
+  border-radius: 5px;
+  background-color: #f2e30f;
+  color: #000000;
+  text-align: center;
+  display: block;
+  margin: 20px 0px auto;
+  padding: 12px;
+  border: 0;
+  width: 100%;
+}
+body main #add-film-container button:hover {
+  background-color: #2E1440;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+/*
+
+
+
+
+
+
+*/
 
 /*# sourceMappingURL=styles.css.map */

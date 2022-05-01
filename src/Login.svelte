@@ -43,8 +43,8 @@
         }
     };
 </script>
-<main>
-    <div class="wrapper">
+<main class="hide-scroll">
+    <div>
         {#if $user}
         <div class="w-full max-w-xs">
             <div class="text-center">
