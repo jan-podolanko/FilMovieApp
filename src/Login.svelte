@@ -52,40 +52,41 @@
             <button type="button" class="mt-3 btn btn-primary" on:click={logout}>Logout</button>
             </div>
         </div>
-        {:else if !shown}        
+        {:else if !shown}
         <div class="log-in-container">
             <div id="app-name">
                 <img src="icon.png" alt="Logo">
-                <div>FilMovieApp</div>
             </div>
             <form>
                 <div class="input-field">
-                    <label for="email">Email</label>
+                    <!-- <label for="email">Email</label> -->
                     <input
                     class="input-field"
                     bind:value={email}
                     id="email"
                     type="email"
-                    placeholder="name@gmail.com"
+                    placeholder="Email"
                     />
                 </div>
                 <div class="input-field">
-                    <label for="password">Password</label>
+                    <!-- <label for="password">Password</label> -->
                     <input
                     class="input-field"
                     bind:value={password}
                     id="password"
                     type="password"
-                    placeholder="*****************"
+                    placeholder="Password"
                     />
                 </div>
                 {#if error}
                     <div class="error-message" transition:fade>{error.message}</div>
                 {/if}
                 <div>
-                    <button type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
-                    <button type="button" on:click|preventDefault={loginWithGoogle}>Sign In with Google</button>
-                    <button type="button" on:click={show}>Sign Up</button>
+                    <div class="buttons">
+                        <button id="sign-in" type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
+                        <button id="sign-up" type="button" on:click={show}>Sign Up</button>
+                    </div>
+                    <button id="sign-in-google" type="button" on:click|preventDefault={loginWithGoogle}>Sign In with Google</button>
                 </div>
             </form>
         </div>
@@ -94,45 +95,41 @@
         <div class="log-in-container">
             <div id="app-name">
                 <img src="icon.png" alt="Logo">
-                <div>FilMovieApp</div>
             </div>
             <form>
             <div class="input-field">
-                <label for="email">Email</label>
                 <input
                 class="input-field"
                 bind:value={semail}
                 id="email"
                 type="email"
-                placeholder="name@gmail.com"
+                placeholder="Email"
                 />
             </div>
             <div class="input-field">
-                <label for="password">Password</label>
                 <input
                 class="input-field"
                 bind:value={spassword}
                 id="password"
                 type="password"
-                placeholder="******************"
+                placeholder="Password"
                 />
             </div>
             <div class="input-field">
-                <label for="scpassword">Confirm Password</label>
                 <input
                 class="input-field"
                 bind:value={scpassword}
                 id="scpassword"
                 type="password"
-                placeholder="******************"
+                placeholder="Confirm password"
                 />
             </div>
             {#if error}
                 <div transition:fade class="error-message">{error.message}</div>
             {/if}
-            <div>
-                <button type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
-                <button type="button" on:click={show}>Back</button>
+            <div class="buttons">
+                <button id="register" type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
+                <button id="back" type="button" on:click={show}>Back</button>
             </div>
         </form>
         {#if showerror}

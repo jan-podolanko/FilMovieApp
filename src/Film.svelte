@@ -1,6 +1,6 @@
 <script>
 	import { deleteDoc,doc,increment,updateDoc } from "firebase/firestore";
-	import { deleteObject, getDownloadURL,ref } from "firebase/storage";
+	import { deleteObject,getDownloadURL,ref } from "firebase/storage";
 	import { db,storage } from './firebase.js';
 	export let title, directors, cast, synopsis, release, id, currentUser, uploadId, likes, dislikes, email;
 	export let close = false;
@@ -51,9 +51,6 @@
 </div>
 
 <style>
-	*{
-		font-family: 'Lato', sans-serif;
-	}
 
 	#likeContainer{
 		height:40px

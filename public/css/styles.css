@@ -3,9 +3,9 @@
 }
 
 .log-in-container {
-  border: solid 5px #5d04fc;
-  background-color: #ffffff;
-  color: #5d04fc;
+  border: solid 5px #2E1440;
+  background: #2E1440;
+  color: #ffffff;
   max-width: fit-content;
   margin: 0 auto;
   border-radius: 10px;
@@ -16,10 +16,10 @@
   text-align: center;
   font-size: larger;
   font-weight: 700;
-  color: black;
+  color: white;
 }
 .log-in-container #app-name img {
-  width: 40%;
+  width: 50%;
 }
 .log-in-container .error-message {
   color: rgb(180, 0, 0);
@@ -28,19 +28,42 @@
   border-radius: 5px;
   padding: 5px;
 }
+.log-in-container .buttons {
+  margin: auto;
+  display: flex;
+  width: 160px;
+}
+.log-in-container .buttons #sign-in {
+  margin-left: 0;
+}
+.log-in-container .buttons #sign-up {
+  margin-right: 0;
+}
+.log-in-container .buttons #register {
+  width: 75px;
+  margin-left: 0;
+}
+.log-in-container .buttons #back {
+  width: 75px;
+  margin-right: 0;
+}
+.log-in-container #sign-in-google {
+  width: 160px;
+}
 .log-in-container button {
   border-radius: 5px;
-  background-color: #5d04fc;
-  color: #ffffff;
+  background-color: #531b6b;
+  color: #FFFFFF;
   text-align: center;
   display: block;
   margin: 10px auto;
   padding: 10px;
+  border: 0;
 }
 .log-in-container button:hover {
-  background-color: #0000c7;
+  background-color: #f2e30f;
   cursor: pointer;
-  color: #ffffff;
+  color: #000000;
 }
 .log-in-container .input-field {
   margin: 10px;
@@ -60,9 +83,15 @@
   width: 100%;
   margin: auto;
   text-align: center;
+  outline: 0;
+  background-color: #2E1440;
+  border-width: 0 0 2px;
+  border-radius: 0;
+  color: #ffffff;
 }
 .log-in-container .input-field input:focus {
-  outline: 1px solid #5d04fc;
+  background-color: #2E1440;
+  border-color: #f2e30f;
 }
 
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=styles.css.map */

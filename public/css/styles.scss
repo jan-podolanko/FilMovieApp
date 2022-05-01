@@ -1,9 +1,11 @@
-$primary: #5d04fc;
-$on-primary: #ffffff;
-$primary-container: #9b49ff;
-$on-primary-container: #0066af;
-$primary-light-variant: #9b49ff;
-$primary-dark-variant: #0000c7;
+$primary: #2E1440;
+$on-primary: #FFFFFF;
+$primary-container: #0000c7;
+$on-primary-container: #d6c0fd;
+$primary-light-variant: #531b6b;
+$secondary: #f2e30f;
+$on-secondary: #000000;
+$secondary-variant: #f2a516;
 $error: rgb(180, 0, 0);
 
 
@@ -14,8 +16,9 @@ $error: rgb(180, 0, 0);
 //Sign In and Sign Up forms
 .log-in-container{
   border: solid 5px $primary;
-  background-color: #ffffff;
-  color: $primary;
+  //background-color: $primary-container;
+  background: $primary;
+  color: #ffffff;
   max-width: fit-content;
   margin: 0 auto;
   border-radius: 10px;
@@ -26,10 +29,10 @@ $error: rgb(180, 0, 0);
     text-align: center;
     font-size: larger;
     font-weight: 700;
-    color: black;
+    color: white;
 
     img{
-      width: 40%;
+      width: 50%;
     }
   }
   .error-message{
@@ -40,20 +43,45 @@ $error: rgb(180, 0, 0);
     padding: 5px;
   }
 
+  .buttons{
+    margin: auto;
+    display: flex;
+    width: 160px;
+    #sign-in{
+      margin-left: 0;
+    }
+    #sign-up{
+      margin-right: 0;
+    }
+    #register{
+      width: 75px;
+      margin-left: 0;
+    }
+    #back{
+      width: 75px;
+      margin-right: 0;
+    }
+  }
+
+  #sign-in-google{
+    width: 160px
+  }
+  
   button{
     border-radius: 5px;
-    background-color: $primary;
+    background-color: $primary-light-variant;
     color: $on-primary;
     text-align: center;
     display: block;
     margin: 10px auto;
     padding: 10px;
+    border: 0;
   }
 
   button:hover{
-    background-color: $primary-dark-variant;
+    background-color: $secondary;
     cursor: pointer;
-    color: $on-primary;
+    color: $on-secondary;
   }
 
   .input-field{
@@ -75,10 +103,16 @@ $error: rgb(180, 0, 0);
       width: 100%;
       margin: auto;
       text-align: center;
+      outline: 0;
+      background-color: $primary;
+      border-width: 0 0 2px;
+      border-radius: 0;
+      color: #ffffff;
     }
 
     input:focus{
-      outline: 1px solid $primary;
+      background-color: $primary;
+      border-color: $secondary;
     }
   }
 }
