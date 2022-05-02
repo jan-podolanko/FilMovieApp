@@ -16,6 +16,14 @@ $error: rgb(180, 0, 0);
   overflow: hidden;
 }
 
+#log-out-button{
+  border-radius: 10px;
+  background-color: $secondary;
+  color: $on-secondary;
+  display: inline;
+  margin-left: 0;
+}
+
 .log-in-container{
   border: solid 5px $primary;
   background-color: $primary;
@@ -23,8 +31,7 @@ $error: rgb(180, 0, 0);
   width: 90%;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 10px 30px;
-  margin-top: 10%;
+  margin-top: 25%;
   font-size: large;
 
   #app-name{
@@ -128,7 +135,7 @@ body{
       color: #ffffff;
       width: 100%;
       border-radius: 10px;
-      padding: 15px 5px;
+      padding: 15px 0;
       margin: 5px auto;
     }
 
@@ -193,7 +200,7 @@ body{
       color: $on-primary;
       border-radius: 10px;
       padding: 10px 15px;
-
+      margin-bottom: 10px;
       #add-pictures{
         display: flex;
       }

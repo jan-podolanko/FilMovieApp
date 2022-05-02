@@ -1,5 +1,5 @@
 <script>
-	import { slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import AddFilm from './AddFilm.svelte';
 	import Film from './Film.svelte';
 	import { showStuff } from './firebase.js';
@@ -34,8 +34,9 @@
 </script>
 
 <main id="main-page">
-	<div id='list-container'>
-	<h3>All movies</h3>
+	<div class="navbar">All movies</div>
+	{#if !shown}
+	<div id='list-container' transition:fly>
 	{#await stuff}
 	<p>...waiting</p>
 	{:then stuff}
@@ -48,11 +49,12 @@
 		{error}
 	{/await}
 	</div>
+	{/if}
 
 	<br>
 		
 	{#if close}
-	<div transition:slide|local id="film-container">
+	<div transition:fly id="film-container">
 	{#if film}
 	<Film {...film}/>
 	{/if}
@@ -69,7 +71,9 @@
 
 	{#if shown}
 	<button id="add-movie-button" class="btn btn-primary material-symbols-outlined" on:click={show}>close</button>
+	<div id="add-film-scroll">
 	<AddFilm user_id={user_id} user_email={user_email}/>
+	</div>
 	{/if}
 </main>
 

@@ -1,6 +1,6 @@
 <script>
   import { Timestamp } from 'firebase/firestore';
-  import { slide } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import { addFilm } from "./firebase";
   let title, synopsis, release, cast, directors, files;
   export let user_email, user_id
@@ -13,7 +13,7 @@
 
 </script>
 
-<div transition:slide|local id="add-film-container">
+<div transition:fly id="add-film-container">
   <form>
     {#if !files}
     <div class="add-film-row" id="add-pictures">

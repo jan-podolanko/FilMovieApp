@@ -46,11 +46,9 @@
 <main class="hide-scroll">
     <div>
         {#if $user}
-        <div class="w-full max-w-xs">
-            <div class="text-center">
-            <h2>{$user.email}</h2>
-            <button type="button" class="mt-3 btn btn-primary" on:click={logout}>Logout</button>
-            </div>
+        <div>
+            <span>{$user.email}</span>
+            <button id="log-out-button" type="button" on:click={logout}>Logout</button>
         </div>
         {:else if !shown}
         <div class="log-in-container">
