@@ -33,7 +33,7 @@ self.addEventListener("activate", (evt) => {
 });
 // listen for fetch events in page navigation and return anything that has been cached
 self.addEventListener("fetch", (evt) => {
-  console.log("[ServiceWorker] Fetch", evt.request.url);
+  //console.log("[ServiceWorker] Fetch", evt.request.url);
   // when not a navigation event return
   if (evt.request.mode !== "navigate") {
     return;

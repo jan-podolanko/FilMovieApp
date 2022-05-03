@@ -110,6 +110,27 @@ body main {
   text-align: center;
   margin: 0 auto;
 }
+body main #sorting-box {
+  background-color: #531b6b;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin: 15px 0;
+}
+body main #sorting-box button {
+  background-color: #2E1440;
+  color: #FFFFFF;
+  border-radius: 10px;
+  border: none;
+}
+body main #sorting-box button:hover {
+  background-color: #f2e30f;
+  cursor: pointer;
+  color: #000000;
+}
+body main #sorting-box button:focus {
+  background-color: #f2e30f;
+  color: #000000;
+}
 body main .film-list-item {
   background-color: #531b6b;
   color: #ffffff;

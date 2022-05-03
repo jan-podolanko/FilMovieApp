@@ -2,7 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { addDoc, collection, getDocs, getFirestore, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, onSnapshot, orderBy, query } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -44,15 +44,22 @@ export async function addFilm(title, release, cast, directors, synopsis, files, 
   await uploadBytes(imgRef, files[0])
 }
 
-export async function showStuff(){
+export async function showStuff(sortF){
   const docRef = collection(db, "films");
-  const docSnap = await getDocs(docRef)
-  const docList = docSnap.docs.map(doc => {
-    return {id:doc.id, ...doc.data()}
-  });
+  //const docSnap = await getDocs(docRef)
+  const q = query(docRef, orderBy("title"))
+
+  const docSnap = await getDocs(q)
+  let docList = []
+  /* const docList = docSnap.docs.map(doc => {
+    return {...doc.data(), id:doc.id}
+  }); */
+  docSnap.forEach((doc) => {
+    docList.push({id:doc.id, ...doc.data()})
+  })
 
   console.log(docList)
-  return docList
+  return docList.sort(sortF)
 }
 
 //w.i.p. -> this shit function below
