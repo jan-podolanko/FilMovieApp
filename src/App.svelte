@@ -16,7 +16,7 @@
 		shown = !shown
 		close = false
 	}
-
+	
 	function sortByLikesDesc(a,b) {
 		return b.likes - a.likes
 	}
@@ -64,10 +64,9 @@
 </script>
 
 <main id="main-page">
-	<div id="sorting-box">
 	<button id="sort-button" class="material-symbols-outlined" on:click={()=>showSort = !showSort}>sort</button>
 	{#if showSort}
-	
+	<div id="sorting-box">
 		<div>
 			<span>Alphabetically: </span>
 			<button on:click={()=>stuff = showStuff(sortByTitleAsc)}>a-z</button>
@@ -83,13 +82,12 @@
 			<button on:click={()=>stuff = showStuff(sortByDateAsc)}>asc</button>
 			<button on:click={()=>stuff = showStuff(sortByDateDesc)}>desc</button>
 		</div>
-	
-	{/if}
 	</div>
+	{/if}
 
 
 	<div class="navbar"></div>
-	{#if !shown}
+	
 		<div id='list-container' transition:fly>
 		{#await stuff}
 			<p>...waiting</p>
@@ -103,7 +101,7 @@
 			{error}
 		{/await}
 		</div>
-	{/if}
+	
 
 	<br>
 		

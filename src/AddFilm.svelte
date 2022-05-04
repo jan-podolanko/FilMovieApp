@@ -11,24 +11,44 @@
     audio.play();
 	}
 
+  let input;
+  let container;
+  let image;
+  let placeholder;
+	let showImage = false;
+
+  function onChange() {
+    const file = input.files[0];
+		
+    if (file) {
+			showImage = true;
+
+      const reader = new FileReader();
+      reader.addEventListener("load", function () {
+        image.setAttribute("src", reader.result);
+      });
+      reader.readAsDataURL(file);
+			
+			return;
+    } 
+		showImage = false; 
+  }
 </script>
 
 <div transition:fly id="add-film-container">
   <form>
-    {#if !files}
     <div class="add-film-row" id="add-pictures">
       <div>
         <label for="inputTitle">Take a picture</label>
-        <input type="file" id="file-input" accept="image/*" capture="environment" bind:files>
+        <input type="file" id="file-input" accept="image/*" capture="environment" bind:files on:change={onChange} bind:this={input}>
       </div>
       <div>
         <label for="inputTitle">Upload an image</label>
-        <input type="file" id="file-input" accept="image/*" bind:files>
+        <input type="file" id="file-input" accept="image/*" bind:files on:change={onChange} bind:this={input}>
       </div>
     </div>
-    {:else}
-    <img src={files[0]} alt="Chosen poster">
-    <!--to read: https://svelte.dev/repl/b5333059a2f548809a3ac3f60a17a8a6?version=3.31.2-->
+    {#if showImage}
+    <img bind:this={image} id="film-poster" src='#' alt="Chosen poster">
     {/if}
     <div class="add-film-row">
       <label for="inputTitle">Title</label>

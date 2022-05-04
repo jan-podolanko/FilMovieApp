@@ -5,7 +5,8 @@
     import { initAuth } from './auth';
     import { auth } from './firebase.js';
     const { loginWithEmailPassword, signUpWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
-
+    import NavBar from './NavBar.svelte'
+    
     let error = null;
     let email = "";
     let password = "";
@@ -46,10 +47,7 @@
 <main class="hide-scroll">
     <div>
         {#if $user}
-        <div>
-            <span>{$user.email}</span>
-            <button id="log-out-button" type="button" on:click={logout}>Logout</button>
-        </div>
+        <span></span>
         {:else if !shown}
         <div class="log-in-container">
             <div id="app-name">
@@ -136,6 +134,6 @@
         </div>
         {/if}
 {#if $user}
-  <App user_id={$user.id} user_email={$user.email}/>
+  <NavBar user_id={$user.id} user_email={$user.email} logout={logout}/>
 {/if}
 </main>

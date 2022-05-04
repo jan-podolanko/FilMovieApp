@@ -130,6 +130,19 @@ body{
     text-align: center;
     margin: 0 auto;
     
+    #sort-button{
+      background-color: $primary;
+      color: $on-primary;
+      border-radius: 10px;
+      border: none;
+    }
+      
+    #sort-button:hover{
+      background-color: $secondary;
+      cursor: pointer;
+      color: $on-secondary;
+    }
+
     #sorting-box{
       background-color: $primary-light-variant;
       border-radius: 10px;
@@ -228,6 +241,12 @@ body{
       margin-bottom: 10px;
       #add-pictures{
         display: flex;
+      }
+
+      #film-poster{
+        border: 5px solid $primary;
+        border-radius: 10px;
+        max-width: 90%;
       }
 
       .add-film-row{

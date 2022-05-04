@@ -110,6 +110,17 @@ body main {
   text-align: center;
   margin: 0 auto;
 }
+body main #sort-button {
+  background-color: #2E1440;
+  color: #FFFFFF;
+  border-radius: 10px;
+  border: none;
+}
+body main #sort-button:hover {
+  background-color: #f2e30f;
+  cursor: pointer;
+  color: #000000;
+}
 body main #sorting-box {
   background-color: #531b6b;
   border-radius: 10px;
@@ -196,6 +207,11 @@ body main #add-film-container {
 }
 body main #add-film-container #add-pictures {
   display: flex;
+}
+body main #add-film-container #film-poster {
+  border: 5px solid #2E1440;
+  border-radius: 10px;
+  max-width: 90%;
 }
 body main #add-film-container .add-film-row {
   display: block;
