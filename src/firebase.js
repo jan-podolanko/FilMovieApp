@@ -2,7 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { addDoc, collection, getDocs, getFirestore, onSnapshot, orderBy, query } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -37,11 +37,38 @@ export async function addFilm(title, release, cast, directors, synopsis, files, 
     likes: 0,
     dislikes: 0,
     user_id: id,
-    user_email: email
+    user_email: email,
+    favorited_by: []
   });
   console.log(doc.id)
   const imgRef = ref(storage, `images/${doc.id}.jpeg`);
   await uploadBytes(imgRef, files[0])
+}
+
+export async function addFavorite(user_id, film_id){
+  const favRef = doc(db, 'films', film_id)
+  await setDoc(favRef, {favorited_by: arrayUnion(user_id)}, {merge:true});
+}
+
+export async function removeFavorite(user_id, film_id){
+  const favRef = doc(db, 'films', film_id)
+  await setDoc(favRef, {favorited_by: arrayRemove(user_id)}, {merge:true});
+}
+
+export async function getFavorites(user_id){
+  const favRef = collection(db, 'films')
+  const q = query(favRef, where("favorited_by", "array-contains", user_id))
+  const favSnap = await getDocs(q)
+  let docList = []
+  /* const docList = docSnap.docs.map(doc => {
+    return {...doc.data(), id:doc.id}
+  }); */
+  favSnap.forEach((doc) => {
+    docList.push({id:doc.id, ...doc.data()})
+  })
+
+  console.log(docList)
+  return docList
 }
 
 export async function showStuff(sortF){

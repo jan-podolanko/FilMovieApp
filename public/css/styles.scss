@@ -130,25 +130,40 @@ body{
     text-align: center;
     margin: 0 auto;
     
-    #sort-button{
-      background-color: $primary;
-      color: $on-primary;
-      border-radius: 10px;
-      border: none;
-    }
-      
-    #sort-button:hover{
-      background-color: $secondary;
-      cursor: pointer;
-      color: $on-secondary;
-    }
+    
 
     #sorting-box{
       background-color: $primary-light-variant;
       border-radius: 10px;
-      padding: 10px 0;
+      padding: 5px 0;
       margin: 15px 0;
       
+      #sorted-by{
+        padding: 15px;
+        #sort-selection{
+          display: inline;
+          position: relative;
+          left: 20px;
+          top: 2px;
+        }
+        #sort-button{
+          position: absolute;
+          left: 50px;
+          top: 80px;
+          background-color: $primary;
+          color: $on-primary;
+          border-radius: 10px;
+          border: none;
+        }
+          
+        #sort-button:hover{
+          background-color: $secondary;
+          cursor: pointer;
+          color: $on-secondary;
+        }
+      }
+      
+
       button{
         background-color: $primary;
         color: $on-primary;
@@ -194,21 +209,54 @@ body{
       font-size: 32px;
     }
 
+
+    #delete-button{
+      position: absolute;
+      right: 50px;
+      margin: 0 !important;
+    }
+
+    .favorite-button{
+      position: absolute;
+      left: 50px;
+      margin: 0 !important;
+    }
     #film-container{
       border-radius: 10px;
       padding: 10px 15px;
       max-width: 600px;
       margin: auto;
       background-color: $primary-light-variant;
-    
+      
       #film-poster{
         border: 5px solid $primary;
         border-radius: 10px;
-        max-width: 90%;
+        max-width: 85%;
+        margin-top: 10px;
       }
 
       .like-container{
         display: flex;
+        #like-button{
+          position: relative;
+          width: 80px;
+          right: 20px;
+        }
+        #dislike-button{
+          position: relative;
+          width: 80px;
+          left: 20px;
+        }
+        #like-counter{
+          position: relative;
+          top: 20px;
+          right: 20px;
+        }
+        #dislike-counter{
+          position: relative;
+          top: 20px;
+          left: 20px;
+        }
       }
 
       button{

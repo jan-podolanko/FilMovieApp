@@ -110,22 +110,34 @@ body main {
   text-align: center;
   margin: 0 auto;
 }
-body main #sort-button {
+body main #sorting-box {
+  background-color: #531b6b;
+  border-radius: 10px;
+  padding: 5px 0;
+  margin: 15px 0;
+}
+body main #sorting-box #sorted-by {
+  padding: 15px;
+}
+body main #sorting-box #sorted-by #sort-selection {
+  display: inline;
+  position: relative;
+  left: 20px;
+  top: 2px;
+}
+body main #sorting-box #sorted-by #sort-button {
+  position: absolute;
+  left: 50px;
+  top: 80px;
   background-color: #2E1440;
   color: #FFFFFF;
   border-radius: 10px;
   border: none;
 }
-body main #sort-button:hover {
+body main #sorting-box #sorted-by #sort-button:hover {
   background-color: #f2e30f;
   cursor: pointer;
   color: #000000;
-}
-body main #sorting-box {
-  background-color: #531b6b;
-  border-radius: 10px;
-  padding: 10px 0;
-  margin: 15px 0;
 }
 body main #sorting-box button {
   background-color: #2E1440;
@@ -165,6 +177,16 @@ body main #add-movie-button {
   color: #000000;
   font-size: 32px;
 }
+body main #delete-button {
+  position: absolute;
+  right: 50px;
+  margin: 0 !important;
+}
+body main .favorite-button {
+  position: absolute;
+  left: 50px;
+  margin: 0 !important;
+}
 body main #film-container {
   border-radius: 10px;
   padding: 10px 15px;
@@ -175,10 +197,31 @@ body main #film-container {
 body main #film-container #film-poster {
   border: 5px solid #2E1440;
   border-radius: 10px;
-  max-width: 90%;
+  max-width: 85%;
+  margin-top: 10px;
 }
 body main #film-container .like-container {
   display: flex;
+}
+body main #film-container .like-container #like-button {
+  position: relative;
+  width: 80px;
+  right: 20px;
+}
+body main #film-container .like-container #dislike-button {
+  position: relative;
+  width: 80px;
+  left: 20px;
+}
+body main #film-container .like-container #like-counter {
+  position: relative;
+  top: 20px;
+  right: 20px;
+}
+body main #film-container .like-container #dislike-counter {
+  position: relative;
+  top: 20px;
+  left: 20px;
 }
 body main #film-container button {
   border-radius: 5px;

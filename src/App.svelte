@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import AddFilm from './AddFilm.svelte';
 	import Film from './Film.svelte';
-	import { showStuff } from './firebase.js';
+	import { getFavorites,showStuff } from './firebase.js';
 	
 	export let user_id, user_email;
 	let stuff = showStuff(sortByTitleAsc);
@@ -10,8 +10,8 @@
 	let film;
 	let close = false;
 	let showSort = false;
-	let func;
-	
+	let selected = 'Sorted by title (a-z)';
+
 	function show(){
 		shown = !shown
 		close = false
@@ -57,33 +57,42 @@
 			uploadId: variable.user_id,
 			likes: variable.likes,
 			dislikes: variable.dislikes,
-			email: variable.user_email
+			email: variable.user_email,
+			favorited_by: variable.favorited_by
 		}
 	}
 	
 </script>
 
 <main id="main-page">
-	<button id="sort-button" class="material-symbols-outlined" on:click={()=>showSort = !showSort}>sort</button>
-	{#if showSort}
+	
 	<div id="sorting-box">
+	
+		<div id="sorted-by">
+			<button id="sort-button" class="material-symbols-outlined" on:click={()=>showSort = !showSort}>sort</button>
+			<div id="sort-selection">
+				{selected}
+			</div>
+		</div>
+	{#if showSort}
 		<div>
 			<span>Alphabetically: </span>
-			<button on:click={()=>stuff = showStuff(sortByTitleAsc)}>a-z</button>
-			<button on:click={()=>stuff = showStuff(sortByTitleDesc)}>z-a</button>
+			<button on:click={()=>stuff = showStuff(sortByTitleAsc)} tabindex='0' on:click={()=>selected='Sorted by title (a-z)'}>a-z</button>
+			<button on:click={()=>stuff = showStuff(sortByTitleDesc)} tabindex='0' on:click={()=>selected='Sorted by title: (z-a)'}>z-a</button>
 		</div>
 		<div>
 			<span>By likes: </span>
-			<button on:click={()=>stuff = showStuff(sortByLikesDesc)} tabindex='0'>best</button>
-			<button on:click={()=>stuff = showStuff(sortByLikesAsc)} tabindex='0'>worst</button>
+			<button on:click={()=>stuff = showStuff(sortByLikesDesc)} tabindex='0' on:click={()=>selected='Sorted by rating (best)'}>best</button>
+			<button on:click={()=>stuff = showStuff(sortByLikesAsc)} tabindex='0' on:click={()=>selected='Sorted by rating (worst)'}>worst</button>
 		</div>
 		<div>
 			<span>By release date: </span>
-			<button on:click={()=>stuff = showStuff(sortByDateAsc)}>asc</button>
-			<button on:click={()=>stuff = showStuff(sortByDateDesc)}>desc</button>
+			<button on:click={()=>stuff = showStuff(sortByDateAsc)} tabindex='0' on:click={()=>selected='Sorted by release date (oldest)'}>asc</button>
+			<button on:click={()=>stuff = showStuff(sortByDateDesc)} tabindex='0' on:click={()=>selected='Sorted by release date (newest)'}>desc</button>
 		</div>
-	</div>
+			<button on:click={()=>stuff = getFavorites(user_id)} tabindex='0' on:click={()=>selected='Favorites'}>Favorites</button>
 	{/if}
+	</div>
 
 
 	<div class="navbar"></div>
