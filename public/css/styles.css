@@ -117,22 +117,24 @@ body main #sorting-box {
   margin: 15px 0;
 }
 body main #sorting-box #sorted-by {
+  height: 20px;
   padding: 15px;
+  position: relative;
 }
 body main #sorting-box #sorted-by #sort-selection {
   display: inline;
-  position: relative;
-  left: 20px;
-  top: 2px;
+  position: absolute;
+  left: 65px;
+  top: 13px;
 }
 body main #sorting-box #sorted-by #sort-button {
   position: absolute;
-  left: 50px;
-  top: 80px;
   background-color: #2E1440;
   color: #FFFFFF;
   border-radius: 10px;
   border: none;
+  left: 10px;
+  top: 2px;
 }
 body main #sorting-box #sorted-by #sort-button:hover {
   background-color: #f2e30f;
@@ -177,15 +179,18 @@ body main #add-movie-button {
   color: #000000;
   font-size: 32px;
 }
-body main #delete-button {
-  position: absolute;
-  right: 50px;
-  margin: 0 !important;
+body main #buttons-plus-title {
+  position: relative;
 }
-body main .favorite-button {
+body main #buttons-plus-title #delete-button {
   position: absolute;
-  left: 50px;
-  margin: 0 !important;
+  right: 0;
+  top: -5px;
+}
+body main #buttons-plus-title .favorite-button {
+  position: absolute;
+  left: 0;
+  top: -5px;
 }
 body main #film-container {
   border-radius: 10px;

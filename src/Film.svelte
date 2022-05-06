@@ -29,27 +29,27 @@
 </script>
 
 <div id='film'>
-{#if currentUser === uploadId}
-<button class="btn btn-danger material-icons" id='delete-button' on:click={()=>deleteFilm(id)}>delete_forever</button>
-{/if}
-
-{#if favorited_by.includes(currentUser)}
-	<button class="material-symbols-outlined favorite-button" on:click={()=>removeFavorite(currentUser,id)}>heart_broken</button>
-{:else}
-	<button class="material-symbols-outlined favorite-button" on:click={()=>addFavorite(currentUser,id)}>favorite</button>
-{/if}
-
-<img id="film-poster" alt="Movie">
-<p id="title">{title}</p>
-<p id="uploader">Uploaded by: {email}</p>
-<p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()}.{release.toDate().getFullYear()}</p>
-<p>Directors: {directors}</p>
-<p>Cast: {cast}</p>
-<div class="like-container">
-	<button id="like-button" class="btn btn-primary material-icons" on:click|once={()=>updateLikes(id,1)}>thumb_up</button>
-	<div id="like-counter">{likes}</div>
-	<div id="dislike-counter">{dislikes}</div>
-	<button id="dislike-button" class="btn btn-primary material-icons" on:click|once={()=>updateLikes(id,-1)}>thumb_down_alt</button>
-</div>
+	<div id="buttons-plus-title">
+	{#if currentUser === uploadId}
+		<button class="btn btn-danger material-icons" id='delete-button' on:click={()=>deleteFilm(id)}>delete_forever</button>
+	{/if}
+	{#if favorited_by.includes(currentUser)}
+		<button class="material-symbols-outlined favorite-button" on:click={()=>removeFavorite(currentUser,id)}>heart_broken</button>
+	{:else}
+		<button class="material-symbols-outlined favorite-button" on:click={()=>addFavorite(currentUser,id)}>favorite</button>
+	{/if}
+	</div>
+	<img id="film-poster" alt="Movie">
+	<p id="title">{title}</p>
+	<p id="uploader">Uploaded by: {email}</p>
+	<p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()}.{release.toDate().getFullYear()}</p>
+	<p>Directors: {directors}</p>
+	<p>Cast: {cast}</p>
+	<div class="like-container">
+		<button id="like-button" class="btn btn-primary material-icons" on:click|once={()=>updateLikes(id,1)}>thumb_up</button>
+		<div id="like-counter">{likes}</div>
+		<div id="dislike-counter">{dislikes}</div>
+		<button id="dislike-button" class="btn btn-primary material-icons" on:click|once={()=>updateLikes(id,-1)}>thumb_down_alt</button>
+	</div>
 <p>Synopsis: {synopsis}</p>
 </div>

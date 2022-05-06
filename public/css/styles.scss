@@ -139,21 +139,23 @@ body{
       margin: 15px 0;
       
       #sorted-by{
+        height: 20px;
         padding: 15px;
+        position: relative;
         #sort-selection{
           display: inline;
-          position: relative;
-          left: 20px;
-          top: 2px;
+          position: absolute;
+          left: 65px;
+          top: 13px;
         }
         #sort-button{
           position: absolute;
-          left: 50px;
-          top: 80px;
           background-color: $primary;
           color: $on-primary;
           border-radius: 10px;
           border: none;
+          left: 10px;
+          top: 2px;
         }
           
         #sort-button:hover{
@@ -209,17 +211,19 @@ body{
       font-size: 32px;
     }
 
+    #buttons-plus-title{
+      position: relative;
+      #delete-button{
+        position: absolute;
+        right: 0;
+        top: -5px;
+      }
 
-    #delete-button{
-      position: absolute;
-      right: 50px;
-      margin: 0 !important;
-    }
-
-    .favorite-button{
-      position: absolute;
-      left: 50px;
-      margin: 0 !important;
+      .favorite-button{
+        position: absolute;
+        left: 0;
+        top: -5px;
+      }
     }
     #film-container{
       border-radius: 10px;
