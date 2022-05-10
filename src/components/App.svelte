@@ -1,16 +1,29 @@
 <script>
+	import { collection,onSnapshot } from 'firebase/firestore';
 	import { fly } from 'svelte/transition';
+	import { db } from '../firebase.js';
 	import AddFilm from './AddFilm.svelte';
 	import Film from './Film.svelte';
-	import { getFavorites,showStuff } from '../firebase.js';
 	
 	export let user_id, user_email;
-	let stuff = showStuff(sortByTitleAsc);
 	let shown = false;
 	let film;
 	let close = false;
 	let showSort = false;
 	let selected = 'Sorted by title (a-z)';
+
+	let filtering = (word => word);
+	let films = [];
+	let q = collection(db, "films")
+	let sorting = sortByTitleAsc
+
+	const unsub = onSnapshot(q, (querySnapshot) => {
+		films = [];
+		querySnapshot.forEach((doc)=> {
+			films.push({id:doc.id, ...doc.data()})
+		})
+		console.log(films)
+	});
 	
 	function show(){
 		shown = !shown
@@ -63,6 +76,7 @@
 		}
 	}
 	
+	
 </script>
 
 <main id="main-page">
@@ -78,38 +92,33 @@
 	{#if showSort}
 		<div>
 			<span>Alphabetically: </span>
-			<button on:click={()=>stuff = showStuff(sortByTitleAsc)} tabindex='0' on:click={()=>selected='Sorted by title (a-z)'}>a-z</button>
-			<button on:click={()=>stuff = showStuff(sortByTitleDesc)} tabindex='0' on:click={()=>selected='Sorted by title: (z-a)'}>z-a</button>
+			<button on:click={()=>sorting = sortByTitleAsc} tabindex='0' on:click={()=>selected='Sorted by title (a-z)'}>a-z</button>
+			<button on:click={()=>sorting = sortByTitleDesc} tabindex='0' on:click={()=>selected='Sorted by title: (z-a)'}>z-a</button>
 		</div>
 		<div>
 			<span>By likes: </span>
-			<button on:click={()=>stuff = showStuff(sortByLikesDesc)} tabindex='0' on:click={()=>selected='Sorted by rating (best)'}>best</button>
-			<button on:click={()=>stuff = showStuff(sortByLikesAsc)} tabindex='0' on:click={()=>selected='Sorted by rating (worst)'}>worst</button>
+			<button on:click={()=>sorting = sortByLikesDesc} tabindex='0' on:click={()=>selected='Sorted by rating (best)'}>best</button>
+			<button on:click={()=>sorting = sortByLikesAsc} tabindex='0' on:click={()=>selected='Sorted by rating (worst)'}>worst</button>
 		</div>
 		<div>
 			<span>By release date: </span>
-			<button on:click={()=>stuff = showStuff(sortByDateAsc)} tabindex='0' on:click={()=>selected='Sorted by release date (oldest)'}>asc</button>
-			<button on:click={()=>stuff = showStuff(sortByDateDesc)} tabindex='0' on:click={()=>selected='Sorted by release date (newest)'}>desc</button>
+			<button on:click={()=>sorting = sortByDateAsc} tabindex='0' on:click={()=>selected='Sorted by release date (oldest)'}>asc</button>
+			<button on:click={()=>sorting = sortByDateDesc} tabindex='0' on:click={()=>selected='Sorted by release date (newest)'}>desc</button>
 		</div>
-			<button on:click={()=>stuff = getFavorites(user_id)} tabindex='0' on:click={()=>selected='Favorites'}>Favorites</button>
+			<button on:click={()=>filtering = (film => {return film.favorited_by.includes(user_id)})} tabindex='0' on:click={()=>selected='Favorites'}>Favorites</button>
+			<button on:click={()=>filtering = (film => film)} tabindex='0' on:click={()=>selected='All movies'}>All movies</button>
 	{/if}
 	</div>
 
 
 	<div class="navbar"></div>
-	
+
 		<div id='list-container' transition:fly>
-		{#await stuff}
-			<p>...waiting</p>
-		{:then stuff}
 			<div id="film-list">
-			{#each stuff as film}
+			{#each films.filter(filtering).sort(sorting) as film}
 				<div on:click={()=>createFilmData(film)} on:click={()=>{close=true}} class="film-list-item" tabindex='0'>{film.title}</div>
 			{/each}
 			</div>
-		{:catch error}
-			{error}
-		{/await}
 		</div>
 	
 
