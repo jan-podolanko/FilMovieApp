@@ -23,8 +23,8 @@
         await loginWithEmailPassword( auth, email, password);
      } catch (err) {
         error = err;
-        alert(error.message);
         navigator.vibrate(300);
+        alert(error.message);
       }
     };
     const signUpHandler = async () => {
@@ -33,8 +33,8 @@
         await createUserWithEmailAndPassword( auth, semail, spassword);
      } catch (err) {
         error = err;
-        alert(error.message);
         navigator.vibrate(300);
+        alert(error.message);
       }
     };
     function checkpassword() {
@@ -43,8 +43,8 @@
             show()
         }
         else {
-            alert("Passwords don't match up.");
             navigator.vibrate(300);
+            alert("Passwords don't match up.");
         }
     };
 </script>
