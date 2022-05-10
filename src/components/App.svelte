@@ -11,7 +11,7 @@
 	let close = false;
 	let showSort = false;
 	let selected = 'Sorted by title (a-z)';
-
+	
 	function show(){
 		shown = !shown
 		close = false

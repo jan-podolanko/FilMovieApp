@@ -42,7 +42,7 @@
 	<img id="film-poster" alt="Movie">
 	<p id="title">{title}</p>
 	<p id="uploader">Uploaded by: {email}</p>
-	<p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()}.{release.toDate().getFullYear()}</p>
+	<p>Release date: {release.toDate().getDate()}.{release.toDate().getMonth()+1}.{release.toDate().getFullYear()}</p>
 	<p>Directors: {directors}</p>
 	<p>Cast: {cast}</p>
 	<div class="like-container">
