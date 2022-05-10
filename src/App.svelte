@@ -18,11 +18,11 @@
 	}
 	
 	function sortByLikesDesc(a,b) {
-		return b.likes - a.likes
+		return (b.likes + b.dislikes) - (a.likes + a.dislikes)
 	}
 
 	function sortByLikesAsc(a,b) {
-		return a.likes - b.likes
+		return (a.likes + a.dislikes) - (b.likes + b.dislikes)
 	}
 
 	function sortByDateAsc(a,b){
@@ -58,7 +58,8 @@
 			likes: variable.likes,
 			dislikes: variable.dislikes,
 			email: variable.user_email,
-			favorited_by: variable.favorited_by
+			favorited_by: variable.favorited_by,
+			trailer: variable.trailer
 		}
 	}
 	

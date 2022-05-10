@@ -2,7 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -60,9 +60,6 @@ export async function getFavorites(user_id){
   const q = query(favRef, where("favorited_by", "array-contains", user_id))
   const favSnap = await getDocs(q)
   let docList = []
-  /* const docList = docSnap.docs.map(doc => {
-    return {...doc.data(), id:doc.id}
-  }); */
   favSnap.forEach((doc) => {
     docList.push({id:doc.id, ...doc.data()})
   })
@@ -73,14 +70,10 @@ export async function getFavorites(user_id){
 
 export async function showStuff(sortF){
   const docRef = collection(db, "films");
-  //const docSnap = await getDocs(docRef)
   const q = query(docRef, orderBy("title"))
 
   const docSnap = await getDocs(q)
   let docList = []
-  /* const docList = docSnap.docs.map(doc => {
-    return {...doc.data(), id:doc.id}
-  }); */
   docSnap.forEach((doc) => {
     docList.push({id:doc.id, ...doc.data()})
   })
@@ -89,31 +82,16 @@ export async function showStuff(sortF){
   return docList.sort(sortF)
 }
 
-//w.i.p. -> this shit function below
-export async function showStuff2(){
-  const docRef = collection(db, "films");
-  let docList = [];
-  let flag;
-  flag = true
-  return new Promise((resolve, reject) => {
-    const unsub = onSnapshot(docRef, (querySnapshot) =>{
-    
-      querySnapshot.forEach((doc) => {
-        docList.push({id:doc.id, ...doc.data()});
-        resolve()
-      });
-      /* return {id:doc.id, ...doc.data()} */
-    });
-    /* const docList = docSnap.docs.map(doc => {
-      return {id:doc.id, ...doc.data()}
-    }); */
-  
-    console.log(docList)
-    return docList
-  });
-  /* const docSnap = await getDocs(docRef) */
-  
-}
+function matchYoutubeUrl(url){
+  var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+   return (url.match(p)) ? RegExp.$1 : false ;
+  }
+
+export async function addTrailer(film_id, link){
+  const filmRef = doc(db, 'films', film_id)
+  const youtube_id = matchYoutubeUrl(link)
+  await setDoc(filmRef, {trailer: youtube_id}, {merge:true});
+};
 
 //firestoreLogLevel("debug");
 

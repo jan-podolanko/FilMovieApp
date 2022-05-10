@@ -14,6 +14,12 @@
   margin-left: 0;
 }
 
+#log-out-button:hover {
+  background-color: #2E1440;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
 .log-in-container {
   border: solid 5px #2E1440;
   background-color: #2E1440;
@@ -246,6 +252,47 @@ body main #film-container button:hover {
 body main #film-container #close-info {
   width: 100%;
 }
+body main #film-container #trailer-player {
+  margin: 10px;
+  border: 5px solid #2E1440;
+  border-radius: 10px;
+}
+body main #film-container #add-trailer {
+  background-color: #f2e30f;
+  color: #000000;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+body main #film-container #add-trailer button {
+  background-color: #2E1440;
+  color: #FFFFFF;
+  width: 90%;
+  margin-top: 15px;
+}
+body main #film-container #add-trailer button:hover {
+  background-color: #f2a516;
+  color: #FFFFFF;
+}
+body main #film-container #add-trailer input {
+  display: block;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  outline: 0;
+  background-color: #f2e30f;
+  border-width: 0 0 2px;
+  border-radius: 0;
+  border-color: #2E1440;
+  color: #000000;
+}
+body main #film-container #add-trailer input:focus {
+  background-color: #f2e30f;
+  border-color: #2E1440;
+}
+body main #film-container #add-trailer button:hover {
+  background-color: #531b6b;
+}
 body main #add-film-container {
   background-color: #531b6b;
   color: #FFFFFF;
@@ -300,14 +347,5 @@ body main #add-film-container button:hover {
   cursor: pointer;
   color: #FFFFFF;
 }
-
-/*
-
-
-
-
-
-
-*/
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,9 +1,10 @@
 <script>
 	import { deleteDoc,doc,increment,updateDoc } from "firebase/firestore";
 	import { deleteObject,getDownloadURL,ref } from "firebase/storage";
-	import { addFavorite,db,removeFavorite,storage } from './firebase.js';
-	export let title, directors, cast, synopsis, release, id, currentUser, uploadId, likes, dislikes, email, favorited_by;
+	import { addFavorite,addTrailer,db,removeFavorite,storage } from './firebase.js';
+	export let title, directors, cast, synopsis, release, id, currentUser, uploadId, likes, dislikes, email, favorited_by, trailer;
 	export let close = false;
+	let link;
 
 	async function updateLikes(id, like){
 		if(like > 0){
@@ -24,8 +25,8 @@
 
 	$: getDownloadURL(ref(storage, `images/${id}.jpeg`)).then((url) =>{
 	let img = document.getElementById("film-poster")
-	img.setAttribute("src",url)})
-	
+	img.setAttribute("src",url)});
+
 </script>
 
 <div id='film'>
@@ -51,5 +52,16 @@
 		<div id="dislike-counter">{dislikes}</div>
 		<button id="dislike-button" class="btn btn-primary material-icons" on:click|once={()=>updateLikes(id,-1)}>thumb_down_alt</button>
 	</div>
-<p>Synopsis: {synopsis}</p>
+	<p>Synopsis: {synopsis}</p>
+	{#if trailer}
+	<div>Trailer:</div>
+	<iframe id="trailer-player" width="90%" height="200" src="https://www.youtube.com/embed/{trailer}" title="Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	{/if}
+	{#if currentUser === uploadId}
+	<div id="add-trailer">
+		<label for="trailer">Add or change trailer</label>
+		<input placeholder="Youtube link" type="text" id="youtube-link" bind:value={link}>
+		<button on:click={addTrailer(id,link)}>Add</button>
+	</div>
+	{/if}
 </div>

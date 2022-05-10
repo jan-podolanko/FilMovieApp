@@ -24,6 +24,12 @@ $error: rgb(180, 0, 0);
   margin-left: 0;
 }
 
+#log-out-button:hover{
+  background-color: $primary;
+  color: $on-primary;
+  cursor: pointer;
+}
+
 .log-in-container{
   border: solid 5px $primary;
   background-color: $primary;
@@ -142,6 +148,7 @@ body{
         height: 20px;
         padding: 15px;
         position: relative;
+        
         #sort-selection{
           display: inline;
           position: absolute;
@@ -283,6 +290,48 @@ body{
       #close-info{
         width: 100%;
       }
+
+      #trailer-player{
+        margin: 10px;
+        border: 5px solid $primary;
+        border-radius: 10px;
+      }
+      #add-trailer{
+        background-color: $secondary;
+        color: $on-secondary;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        button{
+          background-color: $primary;
+          color: $on-primary;
+          width: 90%;
+          margin-top: 15px;
+        }
+        button:hover{
+          background-color: $secondary-variant;
+          color: $on-primary;
+        }
+        input{
+          display: block;
+          width: 80%;
+          margin: auto;
+          text-align: center;
+          outline: 0;
+          background-color: $secondary;
+          border-width: 0 0 2px;
+          border-radius: 0;
+          border-color: $primary;
+          color: $on-secondary;
+        }
+        input:focus{
+          background-color: $secondary;
+          border-color: $primary;
+        }
+        button:hover{
+          background-color: $primary-light-variant;
+        }
+      }
     }
 
     #add-film-container{
@@ -348,12 +397,3 @@ body{
     }
   }
 }
-
-/*
-	
-
-	
-
-	
-
-*/
