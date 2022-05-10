@@ -23,6 +23,8 @@
         await loginWithEmailPassword( auth, email, password);
      } catch (err) {
         error = err;
+        alert(error.message);
+        navigator.vibrate(300);
       }
     };
     const signUpHandler = async () => {
@@ -31,6 +33,8 @@
         await createUserWithEmailAndPassword( auth, semail, spassword);
      } catch (err) {
         error = err;
+        alert(error.message);
+        navigator.vibrate(300);
       }
     };
     function checkpassword() {
@@ -74,9 +78,9 @@
                     placeholder="Password"
                     />
                 </div>
-                {#if error}
+                <!-- {#if error}
                     <div class="error-message" transition:fade>{error.message}</div>
-                {/if}
+                {/if} -->
                 <div>
                     <div class="buttons">
                         <button id="sign-in" type="button" on:click|preventDefault={(e)=>loginHandler(e)}>Sign In</button>
@@ -120,9 +124,9 @@
                 placeholder="Confirm password"
                 />
             </div>
-            {#if error}
+            <!-- {#if error}
                 <div transition:fade class="error-message">{error.message}</div>
-            {/if}
+            {/if} -->
             <div class="buttons">
                 <button id="register" type="button" on:click|preventDefault={()=>checkpassword()}>Sign Up</button>
                 <button id="back" type="button" on:click={show}>Back</button>
