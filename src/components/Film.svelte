@@ -8,8 +8,10 @@
 	async function updateLikes(id, like){
 		if(like > 0){
 			await updateDoc(doc(db, "films", id),{likes: increment(like)})
+			likes++
 		} else {
 			await updateDoc(doc(db, "films", id),{dislikes: increment(like)})
+			dislikes--
 		}
 	}
 

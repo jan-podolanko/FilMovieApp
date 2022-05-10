@@ -9,10 +9,5 @@ const app = new Login({
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
 }
-/* const  Login({
-	target: document.body,
-	props: {
-	}
-}); */
 
 export default app;
