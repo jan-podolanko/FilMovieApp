@@ -2,7 +2,7 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where } from "firebase/firestore";
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -53,33 +53,6 @@ export async function addFavorite(user_id, film_id){
 export async function removeFavorite(user_id, film_id){
   const favRef = doc(db, 'films', film_id)
   await setDoc(favRef, {favorited_by: arrayRemove(user_id)}, {merge:true});
-}
-
-export async function getFavorites(user_id){
-  const favRef = collection(db, 'films')
-  const q = query(favRef, where("favorited_by", "array-contains", user_id))
-  const favSnap = await getDocs(q)
-  let docList = []
-  favSnap.forEach((doc) => {
-    docList.push({id:doc.id, ...doc.data()})
-  })
-
-  console.log(docList)
-  return docList
-}
-
-export async function showStuff(sortF){
-  const docRef = collection(db, "films");
-  const q = query(docRef, orderBy("title"))
-
-  const docSnap = await getDocs(q)
-  let docList = []
-  docSnap.forEach((doc) => {
-    docList.push({id:doc.id, ...doc.data()})
-  })
-
-  console.log(docList)
-  return docList.sort(sortF)
 }
 
 function matchYoutubeUrl(url){
