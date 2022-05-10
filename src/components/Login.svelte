@@ -39,7 +39,8 @@
             show()
         }
         else {
-            showerror = true
+            alert("Passwords don't match up.");
+            navigator.vibrate(300);
         }
     };
 </script>
@@ -127,9 +128,6 @@
                 <button id="back" type="button" on:click={show}>Back</button>
             </div>
         </form>
-        {#if showerror}
-        <div class="error-message">Wrong password</div>
-        {/if}
         </div>
         {/if}
 {#if $user}
