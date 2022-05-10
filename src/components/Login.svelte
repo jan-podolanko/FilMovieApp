@@ -1,6 +1,5 @@
 <script>
     import { createUserWithEmailAndPassword } from 'firebase/auth';
-    import { fade } from 'svelte/transition';
     import { initAuth } from '../auth';
     import { auth } from '../firebase.js';
     const { loginWithEmailPassword, signUpWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
@@ -13,7 +12,6 @@
     let scpassword = "";
     let semail = "";
     let shown = false;
-    let showerror = false;
     function show() {
         shown = !shown
     };

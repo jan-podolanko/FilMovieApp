@@ -5,16 +5,7 @@
   let title, synopsis, release, cast, directors, files;
   export let user_email, user_id
 
-  function vibrate(){
-		navigator.vibrate([200,50,200]);
-		let audio = document.getElementById("audio");
-    audio.play();
-	}
-
-  let input;
-  let container;
-  let image;
-  let placeholder;
+  let input, image;
 	let showImage = false;
 
   function onChange() {
@@ -33,6 +24,7 @@
     } 
 		showImage = false; 
   }
+
 </script>
 
 <div transition:fly id="add-film-container">
@@ -71,5 +63,5 @@
       <input placeholder="What happens in the movie" type="synopsis" id="synopsis-input" bind:value={synopsis} aria-required="true">
     </div>
   </form>
-  <button on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id,user_email)} on:click={()=>vibrate()} action="#">Submit</button>
+  <button on:click={()=>addFilm(title,Timestamp.fromDate(new Date(release)),cast,directors,synopsis,files,user_id,user_email)} action="#">Submit</button>
 </div>
