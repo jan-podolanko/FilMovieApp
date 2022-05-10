@@ -51,7 +51,8 @@ $error: rgb(180, 0, 0);
     }
   }
   .error-message{
-    color: $error;
+    background-color: $error !important;
+    color: #ffffff !important;
     display: block;
     border: 2px solid $error;
     border-radius: 5px;

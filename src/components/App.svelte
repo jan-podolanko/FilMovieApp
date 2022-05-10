@@ -2,7 +2,7 @@
 	import { fly } from 'svelte/transition';
 	import AddFilm from './AddFilm.svelte';
 	import Film from './Film.svelte';
-	import { getFavorites,showStuff } from './firebase.js';
+	import { getFavorites,showStuff } from '../firebase.js';
 	
 	export let user_id, user_email;
 	let stuff = showStuff(sortByTitleAsc);

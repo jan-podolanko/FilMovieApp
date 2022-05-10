@@ -1,7 +1,7 @@
 <script>
   import { Timestamp } from 'firebase/firestore';
   import { fly } from 'svelte/transition';
-  import { addFilm } from "./firebase";
+  import { addFilm } from "../firebase";
   let title, synopsis, release, cast, directors, files;
   export let user_email, user_id
 

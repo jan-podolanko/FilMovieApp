@@ -1,9 +1,8 @@
 <script>
     import { createUserWithEmailAndPassword } from 'firebase/auth';
     import { fade } from 'svelte/transition';
-    import App from './App.svelte';
-    import { initAuth } from './auth';
-    import { auth } from './firebase.js';
+    import { initAuth } from '../auth';
+    import { auth } from '../firebase.js';
     const { loginWithEmailPassword, signUpWithEmailPassword, loginWithGoogle, logout, user } = initAuth();
     import NavBar from './NavBar.svelte'
     

@@ -1,7 +1,7 @@
 <script>
 	import { deleteDoc,doc,increment,updateDoc } from "firebase/firestore";
 	import { deleteObject,getDownloadURL,ref } from "firebase/storage";
-	import { addFavorite,addTrailer,db,removeFavorite,storage } from './firebase.js';
+	import { addFavorite,addTrailer,db,removeFavorite,storage } from '../firebase.js';
 	export let title, directors, cast, synopsis, release, id, currentUser, uploadId, likes, dislikes, email, favorited_by, trailer;
 	export let close = false;
 	let link;
